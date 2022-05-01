@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Nodes">
+      <UniqueIdentifier>{9966bbc0-5415-452d-8941-811ce6cf76d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contexts">
+      <UniqueIdentifier>{465e4deb-0f9f-4743-9603-8bbf25c3ffc4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Variables">
+      <UniqueIdentifier>{a7753093-7139-4f26-92b5-6b6ac48dd83e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Connections">
+      <UniqueIdentifier>{ee1be41c-4fa7-400c-af1d-6622b2c3bf26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Events">
+      <UniqueIdentifier>{97dc2b96-dec6-45a9-8b8e-ad29c0d6c59e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{ff9abf11-0fa7-4fd9-86e0-af3b3a3b8d6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Datas">
+      <UniqueIdentifier>{fe38a192-02dd-4a78-b7a5-71e8c7eb8725}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Executions">
+      <UniqueIdentifier>{642bfa04-d65f-4f80-8af2-d6f4d5562815}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ContextManager.h">
+      <Filter>Contexts</Filter>
+    </ClInclude>
+    <ClInclude Include="Context.h">
+      <Filter>Contexts</Filter>
+    </ClInclude>
+    <ClInclude Include="INode.h">
+      <Filter>Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="IVariable.h">
+      <Filter>Variables</Filter>
+    </ClInclude>
+    <ClInclude Include="IEvent.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="IConnection.h">
+      <Filter>Connections</Filter>
+    </ClInclude>
+    <ClInclude Include="CRC32.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="StringId.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="IConnectable.h">
+      <Filter>Connections</Filter>
+    </ClInclude>
+    <ClInclude Include="IConverter.h">
+      <Filter>Datas</Filter>
+    </ClInclude>
+    <ClInclude Include="IDataType.h">
+      <Filter>Datas</Filter>
+    </ClInclude>
+    <ClInclude Include="ConverterRegistry.h">
+      <Filter>Datas</Filter>
+    </ClInclude>
+    <ClInclude Include="ExecutionResult.h">
+      <Filter>Executions</Filter>
+    </ClInclude>
+    <ClInclude Include="const_string.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="RNPP.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ContextManager.cpp">
+      <Filter>Contexts</Filter>
+    </ClCompile>
+    <ClCompile Include="Context.cpp">
+      <Filter>Contexts</Filter>
+    </ClCompile>
+    <ClCompile Include="INode.cpp">
+      <Filter>Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="IVariable.cpp">
+      <Filter>Variables</Filter>
+    </ClCompile>
+    <ClCompile Include="IEvent.cpp">
+      <Filter>Events</Filter>
+    </ClCompile>
+    <ClCompile Include="IConnection.cpp">
+      <Filter>Connections</Filter>
+    </ClCompile>
+    <ClCompile Include="StringId.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="IConnectable.cpp">
+      <Filter>Connections</Filter>
+    </ClCompile>
+    <ClCompile Include="ConverterRegistry.cpp">
+      <Filter>Datas</Filter>
+    </ClCompile>
+    <ClCompile Include="ExecutionResult.cpp">
+      <Filter>Executions</Filter>
+    </ClCompile>
+    <ClCompile Include="const_string.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
