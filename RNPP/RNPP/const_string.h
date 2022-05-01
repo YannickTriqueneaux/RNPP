@@ -19,7 +19,7 @@ public:
     inline std::string str() const { return *m_sharedStr; }
     inline const char* c_str() const { return m_sharedStr->c_str(); }
 
-    inline bool ref_equal(const const_string& other) const { return m_sharedStr.get() == other.m_sharedStr.get(); }
+    inline bool ref_equals(const const_string& other) const { return m_sharedStr.get() == other.m_sharedStr.get(); }
     inline auto use_count() const { return m_sharedStr.use_count(); }
 };
 

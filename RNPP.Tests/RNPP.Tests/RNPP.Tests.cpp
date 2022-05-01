@@ -58,7 +58,7 @@ namespace RNPPTests
                 test2 = test1;
                 Assert::AreEqual(2l, test1.use_count());
                 Assert::IsTrue(test1 == test2);
-                Assert::IsTrue(test1.ref_equal(test2));
+                Assert::IsTrue(test1.ref_equals(test2));
 
                 modifiableStr = test2.str();
                 Assert::IsTrue(modifiableStr == test2.str());
@@ -69,7 +69,7 @@ namespace RNPPTests
                 Assert::AreEqual(3l, test1.use_count());
                 test2 = "Hey";
                 Assert::AreEqual(2l, test1.use_count());
-                Assert::IsTrue(test1.ref_equal(test3));
+                Assert::IsTrue(test1.ref_equals(test3));
                 test3 = test2;
                 Assert::AreEqual(2l, test2.use_count());
             }
