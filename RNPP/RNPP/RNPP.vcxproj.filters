@@ -84,6 +84,21 @@
     <ClInclude Include="const_string.h">
       <Filter>Utils</Filter>
     </ClInclude>
+    <ClInclude Include="IInput.h">
+      <Filter>Connections</Filter>
+    </ClInclude>
+    <ClInclude Include="IOutput.h">
+      <Filter>Connections</Filter>
+    </ClInclude>
+    <ClInclude Include="INodeType.h">
+      <Filter>Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="ConnectionResult.h">
+      <Filter>Connections</Filter>
+    </ClInclude>
+    <ClInclude Include="IConnectionType.h">
+      <Filter>Connections</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RNPP.cpp">
@@ -124,6 +139,21 @@
     </ClCompile>
     <ClCompile Include="const_string.cpp">
       <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="IInput.cpp">
+      <Filter>Connections</Filter>
+    </ClCompile>
+    <ClCompile Include="IOutput.cpp">
+      <Filter>Connections</Filter>
+    </ClCompile>
+    <ClCompile Include="INodeType.cpp">
+      <Filter>Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="ConnectionResult.cpp">
+      <Filter>Connections</Filter>
+    </ClCompile>
+    <ClCompile Include="IConnectionType.cpp">
+      <Filter>Connections</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

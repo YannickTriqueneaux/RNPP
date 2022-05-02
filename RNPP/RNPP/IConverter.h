@@ -1,5 +1,7 @@
 #pragma once
 
+RNPP_NAMESPACE_BEGIN()
+
 class IDataType;
 
 class IConverter
@@ -18,3 +20,5 @@ public:
 
     virtual bool Convert(const FromType* from, ToType* to) const = 0;
 };
+
+RNPP_NAMESPACE_END()

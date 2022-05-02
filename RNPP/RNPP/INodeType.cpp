@@ -1,5 +1,6 @@
 #include "pch.h"
-#include "StringId.h"
+#include "INodeType.h"
+
 
 RNPP_NAMESPACE_BEGIN()
 

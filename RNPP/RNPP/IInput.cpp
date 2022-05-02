@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "StringId.h"
+#include "IInput.h"
 
 RNPP_NAMESPACE_BEGIN()
 

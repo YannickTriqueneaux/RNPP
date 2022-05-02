@@ -1,6 +1,9 @@
 #pragma once
+#include "pch.h"
 #include <string>
 #include <inttypes.h>
+
+RNPP_NAMESPACE_BEGIN()
 
 namespace
 {
@@ -78,3 +81,6 @@ constexpr uint32_t string_hash(const char* str)
 {
     return ctcrc32(str, strlen(str));
 }
+
+
+RNPP_NAMESPACE_END()

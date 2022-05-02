@@ -2,6 +2,8 @@
 
 #include "pch.h"
 
+RNPP_NAMESPACE_BEGIN()
+
 class const_string
 {
     std::shared_ptr<std::string> m_sharedStr;
@@ -23,3 +25,5 @@ public:
     inline auto use_count() const { return m_sharedStr.use_count(); }
 };
 
+
+RNPP_NAMESPACE_END()

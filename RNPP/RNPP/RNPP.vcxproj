@@ -88,6 +88,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ConnectionResult.h" />
     <ClInclude Include="const_string.h" />
     <ClInclude Include="Context.h" />
     <ClInclude Include="ContextManager.h" />
@@ -96,15 +97,20 @@
     <ClInclude Include="ExecutionResult.h" />
     <ClInclude Include="IConnectable.h" />
     <ClInclude Include="IConnection.h" />
+    <ClInclude Include="IConnectionType.h" />
     <ClInclude Include="IConverter.h" />
     <ClInclude Include="IDataType.h" />
     <ClInclude Include="IEvent.h" />
+    <ClInclude Include="IInput.h" />
     <ClInclude Include="INode.h" />
+    <ClInclude Include="INodeType.h" />
+    <ClInclude Include="IOutput.h" />
     <ClInclude Include="IVariable.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="StringId.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ConnectionResult.cpp" />
     <ClCompile Include="const_string.cpp" />
     <ClCompile Include="Context.cpp" />
     <ClCompile Include="ContextManager.cpp" />
@@ -112,8 +118,12 @@
     <ClCompile Include="ExecutionResult.cpp" />
     <ClCompile Include="IConnectable.cpp" />
     <ClCompile Include="IConnection.cpp" />
+    <ClCompile Include="IConnectionType.cpp" />
     <ClCompile Include="IEvent.cpp" />
+    <ClCompile Include="IInput.cpp" />
     <ClCompile Include="INode.cpp" />
+    <ClCompile Include="INodeType.cpp" />
+    <ClCompile Include="IOutput.cpp" />
     <ClCompile Include="IVariable.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

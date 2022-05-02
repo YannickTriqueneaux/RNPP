@@ -7,17 +7,10 @@
 
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
+using namespace RNPP_NAMESPACE;
 
 namespace RNPPTests
 {
-	TEST_CLASS(RNPPTests)
-	{
-	public:
-		
-		TEST_METHOD(TestNothing)
-		{
-		}
-	};
 
 
     TEST_CLASS(RNPPTests_StringHash)

@@ -1,6 +1,8 @@
 #include "pch.h"
-#include "StringId.h"
+#include "IConnectionType.h"
+
 
 RNPP_NAMESPACE_BEGIN()
+
 
 RNPP_NAMESPACE_END()

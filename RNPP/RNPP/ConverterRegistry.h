@@ -2,6 +2,8 @@
 #include "pch.h"
 #include "IDataType.h"
 
+RNPP_NAMESPACE_BEGIN()
+
 class IConverter;
 
 class ConverterRegistry
@@ -14,3 +16,4 @@ public:
     void RegisterConverter(const IConverter* converter);
 };
 
+RNPP_NAMESPACE_END()

@@ -17,6 +17,14 @@
 #include <list>
 #include <type_traits>
 #include <chrono>
+#include <functional>
 
 #include <memory>
 #include <assert.h>
+
+#if !defined(RNPP_NAMESPACE)//can be overridden by compiler arguments in case of conflict
+#define RNPP_NAMESPACE RNPP
+#endif
+
+#define RNPP_NAMESPACE_BEGIN() namespace RNPP_NAMESPACE {
+#define RNPP_NAMESPACE_END() }

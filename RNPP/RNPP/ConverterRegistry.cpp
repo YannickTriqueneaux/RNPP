@@ -2,6 +2,8 @@
 #include "ConverterRegistry.h"
 #include "IConverter.h"
 
+RNPP_NAMESPACE_BEGIN()
+
 const IConverter* ConverterRegistry::GetConverter(const IDataType* from, const IDataType* to) const
 {
     auto fromIt = m_converters.find(from->GetId());
@@ -29,3 +31,5 @@ void ConverterRegistry::RegisterConverter(const IConverter* converter)
     assert(fromIt->second.find(toId) == fromIt->second.end() && "Converter already registered for these types");
     fromIt->second[toId] = converter;
 }
+
+RNPP_NAMESPACE_END()

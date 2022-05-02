@@ -1,6 +1,8 @@
 #pragma once
 #include "CRC32.h"
 
+RNPP_NAMESPACE_BEGIN()
+
 class StringId
 {
 public:
@@ -53,5 +55,9 @@ public:
 #else
 #define HIDDEN_STRING_ID(str) StringId("Hidden", str ## _hash)
 #endif
+
+
+
+RNPP_NAMESPACE_END()
 
 
