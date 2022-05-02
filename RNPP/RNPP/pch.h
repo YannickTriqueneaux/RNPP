@@ -26,5 +26,7 @@
 #define RNPP_NAMESPACE RNPP
 #endif
 
+#define RNPP_INTERNAL
+
 #define RNPP_NAMESPACE_BEGIN() namespace RNPP_NAMESPACE {
 #define RNPP_NAMESPACE_END() }

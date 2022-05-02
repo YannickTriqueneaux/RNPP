@@ -17,7 +17,10 @@ class IConnection
         virtual bool IsConnected() const = 0;
         virtual IOutput* From() const = 0;
         virtual IInput* To() const = 0;
+
         virtual const ConnectionResult& GetConnectionResult() const = 0;
+        virtual void SetOutputAsLost() = 0;
+        virtual void SetInputAsLost() = 0;
 
         virtual IConverter* GetConverter() const = 0;
 };
