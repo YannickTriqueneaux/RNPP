@@ -23,8 +23,11 @@ public:
     virtual IInput* GetInput(unsigned int index) const = 0;
     virtual IOutput* GetOutput(unsigned int index) const = 0;
 
-    virtual void OnInputConnected(unsigned int intputIndex, const IOutput* output) const = 0;
-    virtual void OnInputDisconnected(unsigned int intputIndex, const IOutput* output) const = 0;
+    virtual void OnInputConnected(const IInput* input, const IOutput* output) const = 0;
+    virtual void OnInputDisconnected(const IInput* input, const IOutput* output) const = 0;
+
+    //Returns true if this change must make the Node being executed on next step
+    virtual bool InputChanged(const IInput* input, const IOutput* byOUtput) const = 0;
 
     virtual ExecutionResult Execute() = 0;
 };

@@ -19,14 +19,37 @@
 #include <chrono>
 #include <functional>
 
+
 #include <memory>
 #include <assert.h>
 
 #if !defined(RNPP_NAMESPACE)//can be overridden by compiler arguments in case of conflict
-#define RNPP_NAMESPACE RNPP
+    #define RNPP_NAMESPACE RNPP
 #endif
 
 #define RNPP_INTERNAL
 
 #define RNPP_NAMESPACE_BEGIN() namespace RNPP_NAMESPACE {
 #define RNPP_NAMESPACE_END() }
+
+#if !defined(RNPP_ALLOW_PARALLEL)//can be overridden by compiler arguments
+    #define RNPP_ALLOW_PARALLEL() true
+    
+    #if RNPP_ALLOW_PARALLEL()
+    
+        #if !defined(NO_PPL)
+            #include <concurrent_vector.h>
+            #include <concurrent_unordered_set.h>
+            
+            #define concurrent_vector Concurrency::concurrent_vector
+            #define concurrent_unordered_set Concurrency::concurrent_unordered_set
+            
+        #else
+            #include "concurrent_custom.h"//customize compiler arguments include paths to make it find your own
+        #endif
+    
+    #endif
+
+#else
+    #define RNPP_ALLOW_PARALLEL() false
+#endif

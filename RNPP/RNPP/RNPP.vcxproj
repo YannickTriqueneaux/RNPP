@@ -98,6 +98,7 @@
     <ClInclude Include="IConnectable.h" />
     <ClInclude Include="IConnection.h" />
     <ClInclude Include="IConnectionType.h" />
+    <ClInclude Include="IContextExecutor.h" />
     <ClInclude Include="IConverter.h" />
     <ClInclude Include="IDataType.h" />
     <ClInclude Include="IEvent.h" />

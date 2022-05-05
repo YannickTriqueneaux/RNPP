@@ -99,6 +99,9 @@
     <ClInclude Include="IConnectionType.h">
       <Filter>Connections</Filter>
     </ClInclude>
+    <ClInclude Include="IContextExecutor.h">
+      <Filter>Executions</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RNPP.cpp">

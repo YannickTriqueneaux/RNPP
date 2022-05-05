@@ -5,6 +5,7 @@
 #include "IInput.h"
 #include "ConverterRegistry.h"
 #include "IConnectionType.h"
+#include "ICOntextExecutor.h"
 
 RNPP_NAMESPACE_BEGIN()
 
@@ -14,6 +15,20 @@ INode* Context::CreateNode(const INodeType* nodeType)
     assert(node != nullptr && "Failed to create node");
     assert(m_nodes.find(node->GetId()) == m_nodes.end() && "A node with the same Id already exists in this context");
     m_nodes[node->GetId()] = node;
+
+    for (int i = node->GetInputCount(); i >= 0; --i)
+    {
+        auto input = node->GetInput(i);
+        IInput::SetNode(input, node);
+    }
+
+    for (int o = node->GetOutputCount(); o >= 0; --o)
+    {
+        auto output = node->GetOutput(o);
+        IOutput::SetNode(output, node);
+        IOutput::SetContext(output, this);
+    }
+
     return node;
 }
 
@@ -84,21 +99,68 @@ const IConnection* Context::Connect(const IOutput* from, const IInput* to, const
         m_outputConnections[from->GetId()] = std::move(outputConnections);
     }
 
+    IInput::GetNode(to)->OnInputConnected(to, from);
+
     return connection;
 }
 
 bool Context::Disconnect(IConnection::id_t connectionId)
 {
-    return false;
+    auto connectionIt = m_connections.find(connectionId);
+    if (connectionIt == m_connections.end())
+        return false;
+    auto connection = connectionIt->second;
+    if (connection->To() != nullptr)
+    {
+        auto erasedInputConnectionCount = m_inputConnections.erase(connection->To()->GetId());
+        assert(erasedInputConnectionCount > 0 && "Input failed to be disconnected, this input was not registered");
+        const INode* node = IInput::GetNode(connection->To());
+        node->OnInputDisconnected(connection->To(), connection->From());
+    }
+
+    if (connection->From() != nullptr)
+    {
+        auto outputsCoIt = m_outputConnections.find(connection->From()->GetId());
+        assert(outputsCoIt != m_outputConnections.end() && "Output failed to be disconnected, this output was not registered");
+
+        auto& outputConnections = outputsCoIt->second;
+        auto removedOutputConnectionIt = std::remove(outputConnections.begin(), outputConnections.end(), connection);
+        assert(removedOutputConnectionIt != outputConnections.end() && "Output failed to be disconnected, this output was not registered");
+        if(outputConnections.size() == 0)
+            m_outputConnections.erase(connection->From()->GetId());
+    }
+
+    auto erasedConnectionCount = m_connections.erase(connectionId);
+    assert(erasedConnectionCount > 0 && "Connection failed to be disconnected, this might be due to a concurrent disconnection");
+
+    
+    connection->GetType()->DeleteInstance(connection, this);
+    
+    return true;
 }
 
-void Context::OutputChanged(IOutput::id_t outputId)
+bool Context::OutputChanged(IOutput::id_t outputId)
 {
+    auto outputsCoIt = m_outputConnections.find(outputId);
+    if (outputsCoIt == m_outputConnections.end())
+        return false;
+
+    auto& outputConnections = outputsCoIt->second;
+
+    assert(outputConnections.size() > 0 && "An output changed without connection to it, but this one hasn't been correctly deleted");
+#if !NDEBUG
+    for (const IConnection* co : outputConnections)
+    {
+        //sanity check
+        assert(co->From() != nullptr && co->From()->GetId() == outputId && "Invalid connection detected. a connection has been registered but modified without notifying the context. Delete and recreate connections instead of modify them");
+    }
+#endif
+    m_executor->OnOutputChanged(outputConnections[0]->From(), outputConnections);
 }
 
 bool Context::Step()
 {
-    return false;
+    return m_executor->Execute();
 }
 
 RNPP_NAMESPACE_END()
