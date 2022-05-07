@@ -3,7 +3,7 @@
 #include <string>
 #include <inttypes.h>
 
-RNPP_NAMESPACE_BEGIN()
+RNPPBASICS_NAMESPACE_BEGIN()
 
 namespace
 {
@@ -83,4 +83,4 @@ constexpr uint32_t string_hash(const char* str)
 }
 
 
-RNPP_NAMESPACE_END()
+RNPPBASICS_NAMESPACE_END()

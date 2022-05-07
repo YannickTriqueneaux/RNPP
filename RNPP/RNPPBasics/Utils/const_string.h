@@ -2,7 +2,7 @@
 
 #include "pch.h"
 
-RNPP_NAMESPACE_BEGIN()
+RNPPBASICS_NAMESPACE_BEGIN()
 
 class const_string
 {
@@ -26,4 +26,4 @@ public:
 };
 
 
-RNPP_NAMESPACE_END()
+RNPPBASICS_NAMESPACE_END()

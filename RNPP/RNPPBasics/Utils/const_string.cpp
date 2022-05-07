@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "const_string.h"
 
-RNPP_NAMESPACE_BEGIN()
+RNPPBASICS_NAMESPACE_BEGIN()
 
 const_string const_string::null()
 {
@@ -9,4 +9,4 @@ const_string const_string::null()
     return const_string();
 }
 
-RNPP_NAMESPACE_END()
+RNPPBASICS_NAMESPACE_END()

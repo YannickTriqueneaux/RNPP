@@ -5,7 +5,7 @@ RNPP_NAMESPACE_BEGIN()
 
 ConnectionResult ConnectionResult::success()
 {
-    return std::move(ConnectionResult(0, const_string::null()));
+    return std::move(ConnectionResult(0));
 }
 
 

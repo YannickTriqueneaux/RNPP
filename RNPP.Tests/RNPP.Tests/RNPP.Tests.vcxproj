@@ -99,6 +99,9 @@
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\RNPP\RNPPBasics\RNPPBasics.vcxproj">
+      <Project>{ff0afc3f-16a9-41fc-8a6b-ebf31853644e}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\..\RNPP\RNPP\RNPP.vcxproj">
       <Project>{9a079b42-cb9a-4916-9d6f-dcc173079718}</Project>
     </ProjectReference>

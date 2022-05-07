@@ -1,7 +1,7 @@
 #pragma once
 #include "CRC32.h"
 
-RNPP_NAMESPACE_BEGIN()
+RNPPBASICS_NAMESPACE_BEGIN()
 
 class StringId
 {
@@ -58,6 +58,6 @@ public:
 
 
 
-RNPP_NAMESPACE_END()
+RNPPBASICS_NAMESPACE_END()
 
 

@@ -9,9 +9,9 @@
 
 RNPP_NAMESPACE_BEGIN()
 
-Context::Context(id_t id, const StringId& name, IContextExecutor* executor, const ConverterRegistry* converterRegistry, 
+Context::Context(id_t id, IContextExecutor* executor, const ConverterRegistry* converterRegistry, 
     Context* parent, INode* associatedNode)
-    : m_id(id), m_name(name), m_executor(executor), m_converterRegistry(converterRegistry), m_parent(parent), m_associatedNode(associatedNode)
+    : m_id(id), m_executor(executor), m_converterRegistry(converterRegistry), m_parent(parent), m_associatedNode(associatedNode)
 {
     executor->Initialize(m_nodes, m_connections);
 }

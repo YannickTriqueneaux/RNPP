@@ -3,7 +3,6 @@
 #include "IVariable.h"
 #include "IConnection.h"
 #include "IConnectable.h"
-#include "StringId.h"
 #include "ConnectionResult.h"
 #include "IInput.h"
 #include "IOutput.h"
@@ -23,7 +22,6 @@ public:
 
 private:
     id_t m_id;
-    StringId m_name;
     const ConverterRegistry* m_converterRegistry;
     Context* m_parent;
     INode* m_associatedNode;
@@ -37,7 +35,7 @@ private:
 
 
 public:
-    Context(id_t id, const StringId& name, IContextExecutor* executor, const ConverterRegistry* converterRegistry,
+    Context(id_t id, IContextExecutor* executor, const ConverterRegistry* converterRegistry,
         Context* parent = nullptr, INode* associatedNode = nullptr);
 
     ~Context();

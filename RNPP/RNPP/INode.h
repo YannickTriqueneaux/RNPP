@@ -1,6 +1,5 @@
 #pragma once
 #include "pch.h"
-#include "ExecutionResult.h"
 
 RNPP_NAMESPACE_BEGIN()
 
@@ -29,7 +28,7 @@ public:
     //Returns true if this change must make the Node being executed on next step
     virtual bool InputChanged(const IInput* input, const IOutput* byOUtput) const = 0;
 
-    virtual ExecutionResult Execute() = 0;
+    virtual int Execute() = 0;
 };
 
 RNPP_NAMESPACE_END()

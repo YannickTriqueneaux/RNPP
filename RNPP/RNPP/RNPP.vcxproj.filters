@@ -60,12 +60,6 @@
     <ClInclude Include="IConnection.h">
       <Filter>Connections</Filter>
     </ClInclude>
-    <ClInclude Include="CRC32.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="StringId.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
     <ClInclude Include="IConnectable.h">
       <Filter>Connections</Filter>
     </ClInclude>
@@ -77,12 +71,6 @@
     </ClInclude>
     <ClInclude Include="ConverterRegistry.h">
       <Filter>Datas</Filter>
-    </ClInclude>
-    <ClInclude Include="ExecutionResult.h">
-      <Filter>Executions</Filter>
-    </ClInclude>
-    <ClInclude Include="const_string.h">
-      <Filter>Utils</Filter>
     </ClInclude>
     <ClInclude Include="IInput.h">
       <Filter>Connections</Filter>
@@ -104,9 +92,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="RNPP.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -128,20 +113,11 @@
     <ClCompile Include="IConnection.cpp">
       <Filter>Connections</Filter>
     </ClCompile>
-    <ClCompile Include="StringId.cpp">
-      <Filter>Utils</Filter>
-    </ClCompile>
     <ClCompile Include="IConnectable.cpp">
       <Filter>Connections</Filter>
     </ClCompile>
     <ClCompile Include="ConverterRegistry.cpp">
       <Filter>Datas</Filter>
-    </ClCompile>
-    <ClCompile Include="ExecutionResult.cpp">
-      <Filter>Executions</Filter>
-    </ClCompile>
-    <ClCompile Include="const_string.cpp">
-      <Filter>Utils</Filter>
     </ClCompile>
     <ClCompile Include="IInput.cpp">
       <Filter>Connections</Filter>

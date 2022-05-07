@@ -1,9 +1,9 @@
 #include "pch.h"
 
 
-#include "..\..\RNPP\RNPP\CRC32.h"
-#include "..\..\RNPP\RNPP\StringId.h"
-#include "..\..\RNPP\RNPP\const_string.h"
+#include "..\..\RNPP\RNPPBasics\Utils\CRC32.h"
+#include "..\..\RNPP\RNPPBasics\Utils\StringId.h"
+#include "..\..\RNPP\RNPPBasics\Utils\const_string.h"
 
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
