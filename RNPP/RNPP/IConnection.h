@@ -7,6 +7,7 @@ class IConnectable;
 class IConverter;
 class IOutput;
 class IInput;
+class IConnectionType;
 
 class IConnection
 {

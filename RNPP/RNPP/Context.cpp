@@ -9,6 +9,18 @@
 
 RNPP_NAMESPACE_BEGIN()
 
+Context::Context(id_t id, const StringId& name, IContextExecutor* executor, const ConverterRegistry* converterRegistry, 
+    Context* parent, INode* associatedNode)
+    : m_id(id), m_name(name), m_executor(executor), m_converterRegistry(converterRegistry), m_parent(parent), m_associatedNode(associatedNode)
+{
+    executor->Initialize(m_nodes, m_connections);
+}
+
+Context::~Context() 
+{
+    m_executor->Uninitialize();
+}
+
 INode* Context::CreateNode(const INodeType* nodeType)
 {
     auto node = nodeType->CreateInstance(this);
@@ -28,6 +40,8 @@ INode* Context::CreateNode(const INodeType* nodeType)
         IOutput::SetNode(output, node);
         IOutput::SetContext(output, this);
     }
+
+    m_executor->OnNodeAdded(node);
 
     return node;
 }
@@ -57,9 +71,9 @@ bool Context::DeleteNode(INode::id_t nodeId)
             if (outputsCoIt == m_outputConnections.end())
             {
                 auto& outputConnections = outputsCoIt->second;
-                for (IConnection* c : outputConnections)
+                for (const IConnection* c : outputConnections)
                 {
-                    c->SetOutputAsLost();
+                    const_cast<IConnection*>(c)->SetOutputAsLost();
                 }
                 outputConnections.clear();
 
@@ -70,6 +84,10 @@ bool Context::DeleteNode(INode::id_t nodeId)
 
         auto erasedCount = m_nodes.erase(nodeId);
         assert(erasedCount > 0 && "Failed to delete node, might be a concurrent delete node call");
+
+
+        m_executor->OnNodeRemoved(node);
+
         node->GetType()->DeleteInstance(node, this);
         return true;
     }
@@ -80,7 +98,7 @@ const IConnection* Context::Connect(const IOutput* from, const IInput* to, const
 {
     assert(m_inputConnections.find(to->GetId()) == m_inputConnections.end() && "This input is already connected");
     auto converter = m_converterRegistry->GetConverter(from->GetType(), to->GetType());
-    ConnectionResult canConnect = to->CanConnect(from, converter, this);
+    ConnectionResult canConnect = to->CanConnect(from, converter);
     auto connection = connectionType->CreateInstance(this, from, to, converter, canConnect);
     assert(connection != nullptr && "Failed to create node");
     assert(m_connections.find(connection->GetId()) == m_connections.end() && "A node with the same Id already exists in this context");
@@ -95,11 +113,13 @@ const IConnection* Context::Connect(const IOutput* from, const IInput* to, const
     }
     else 
     {
-        std::vector<IConnection*> outputConnections = { connection };
+        std::vector<const IConnection*> outputConnections = { connection };
         m_outputConnections[from->GetId()] = std::move(outputConnections);
     }
 
-    IInput::GetNode(to)->OnInputConnected(to, from);
+    to->GetNode()->OnInputConnected(to, from);
+
+    m_executor->OnConnectionAdded(connection);
 
     return connection;
 }
@@ -114,7 +134,7 @@ bool Context::Disconnect(IConnection::id_t connectionId)
     {
         auto erasedInputConnectionCount = m_inputConnections.erase(connection->To()->GetId());
         assert(erasedInputConnectionCount > 0 && "Input failed to be disconnected, this input was not registered");
-        const INode* node = IInput::GetNode(connection->To());
+        const INode* node = connection->To()->GetNode();
         node->OnInputDisconnected(connection->To(), connection->From());
     }
 
@@ -133,6 +153,7 @@ bool Context::Disconnect(IConnection::id_t connectionId)
     auto erasedConnectionCount = m_connections.erase(connectionId);
     assert(erasedConnectionCount > 0 && "Connection failed to be disconnected, this might be due to a concurrent disconnection");
 
+    m_executor->OnConnectionRemoved(connection);
     
     connection->GetType()->DeleteInstance(connection, this);
     
@@ -156,11 +177,12 @@ bool Context::OutputChanged(IOutput::id_t outputId)
     }
 #endif
     m_executor->OnOutputChanged(outputConnections[0]->From(), outputConnections);
+    return true;
 }
 
 bool Context::Step()
 {
-    return m_executor->Execute();
+    return m_executor->Step();
 }
 
 RNPP_NAMESPACE_END()

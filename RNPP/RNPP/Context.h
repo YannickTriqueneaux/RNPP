@@ -33,19 +33,14 @@ private:
     std::unordered_map<INode::id_t, INode*> m_nodes;
     std::unordered_map<IConnection::id_t, IConnection*> m_connections;
     std::unordered_map<IInput::id_t, IConnection*> m_inputConnections;
-    std::unordered_map<IOutput::id_t, std::vector<IConnection*>> m_outputConnections;
+    std::unordered_map<IOutput::id_t, std::vector<const IConnection*>> m_outputConnections;
 
-#if RNPP_ALLOW_PARALLEL()
-    concurrent_unordered_set<INode::id_t> m_nodesToExecuteIds[2];
-    concurrent_vector<INode*> m_nodesToExecuteQueue[2];
-    bool m_stepswapIndexes;
-#endif
 
 public:
-    Context(id_t id, const StringId& name, IContextExecutor* executor, const ConverterRegistry* converterRegistry, Context* parent = nullptr, INode* associatedNode = nullptr)
-        : m_id(id), m_name(name), m_executor(executor), m_converterRegistry(converterRegistry), m_parent(parent), m_associatedNode(associatedNode) {}
+    Context(id_t id, const StringId& name, IContextExecutor* executor, const ConverterRegistry* converterRegistry,
+        Context* parent = nullptr, INode* associatedNode = nullptr);
 
-
+    ~Context();
 
     INode* CreateNode(const INodeType* nodeType);
     const IConnection* Connect(const IOutput* from, const IInput* to, const IConnectionType* connectionType);
