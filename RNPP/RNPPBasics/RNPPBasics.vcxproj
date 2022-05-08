@@ -154,6 +154,28 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="PCH\pch.h" />
+    <ClInclude Include="Reflexions\ArrayDescriptor.h" />
+    <ClInclude Include="Reflexions\Descriptor.h" />
+    <ClInclude Include="Reflexions\DescriptorHelper.h" />
+    <ClInclude Include="Reflexions\DescriptorRegistry.h" />
+    <ClInclude Include="Reflexions\Field.h" />
+    <ClInclude Include="Reflexions\FieldInstance.h" />
+    <ClInclude Include="Reflexions\GenericDescriptor.h" />
+    <ClInclude Include="Reflexions\Instance.h" />
+    <ClInclude Include="Reflexions\MapDescriptor.h" />
+    <ClInclude Include="Reflexions\NativeDescriptor.h" />
+    <ClInclude Include="Reflexions\PairDescriptor.h" />
+    <ClInclude Include="Reflexions\StringDescriptor.h" />
+    <ClInclude Include="Serializations\Array.h" />
+    <ClInclude Include="Serializations\Element.h" />
+    <ClInclude Include="Serializations\Formats.h" />
+    <ClInclude Include="Serializations\InstanceParser.h" />
+    <ClInclude Include="Serializations\InstanceSerializer.h" />
+    <ClInclude Include="Serializations\Object.h" />
+    <ClInclude Include="Serializations\Page.h" />
+    <ClInclude Include="Serializations\Stringizable.h" />
+    <ClInclude Include="Serializations\Stringizer.h" />
+    <ClInclude Include="Serializations\Value.h" />
     <ClInclude Include="Utils\const_string.h" />
     <ClInclude Include="Utils\CRC32.h" />
     <ClInclude Include="Utils\StringId.h" />
@@ -165,6 +187,28 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Reflexions\ArrayDescriptor.cpp" />
+    <ClCompile Include="Reflexions\Descriptor.cpp" />
+    <ClCompile Include="Reflexions\DescriptorRegistry.cpp" />
+    <ClCompile Include="Reflexions\Field.cpp" />
+    <ClCompile Include="Reflexions\FieldInstance.cpp" />
+    <ClCompile Include="Reflexions\GenericDescriptor.cpp" />
+    <ClCompile Include="Reflexions\Instance.cpp" />
+    <ClCompile Include="Reflexions\MapDescriptor.cpp" />
+    <ClCompile Include="Reflexions\NativeDescriptor.cpp" />
+    <ClCompile Include="Reflexions\PairDescriptor.cpp" />
+    <ClCompile Include="Reflexions\StringDescriptor.cpp" />
+    <ClCompile Include="Serializations\Array.cpp" />
+    <ClCompile Include="Serializations\Boolean.cpp" />
+    <ClCompile Include="Serializations\InstanceParser.cpp" />
+    <ClCompile Include="Serializations\InstanceSerializer.cpp" />
+    <ClCompile Include="Serializations\JSONValues.cpp" />
+    <ClCompile Include="Serializations\NumberValue.cpp" />
+    <ClCompile Include="Serializations\Object.cpp" />
+    <ClCompile Include="Serializations\Page.cpp" />
+    <ClCompile Include="Serializations\Stringizable.cpp" />
+    <ClCompile Include="Serializations\Stringizer.cpp" />
+    <ClCompile Include="Serializations\Value.cpp" />
     <ClCompile Include="Utils\const_string.cpp" />
     <ClCompile Include="Utils\StringId.cpp" />
   </ItemGroup>
