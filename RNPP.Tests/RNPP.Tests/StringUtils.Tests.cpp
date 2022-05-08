@@ -7,7 +7,8 @@
 
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-using namespace RNPP_NAMESPACE;
+//using namespace RNPP_NAMESPACE;
+using namespace RNPPBasics;
 
 namespace RNPPTests
 {

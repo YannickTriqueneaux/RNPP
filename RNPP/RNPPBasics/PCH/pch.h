@@ -25,13 +25,13 @@
 #include <memory>
 #include <assert.h>
 
-#if !defined(RNPP_NAMESPACE)//can be overridden by compiler arguments in case of conflict
+#if !defined(RNPPBasics_NAMESPACE)//can be overridden by compiler arguments in case of conflict
 #define RNPPBASICS_NAMESPACE RNPPBasics
 #endif
 
 #define RNPPBASICS_INTERNAL
 
-#define RNPPBASICS_NAMESPACE_BEGIN() namespace RNPP_NAMESPACE {
+#define RNPPBASICS_NAMESPACE_BEGIN() namespace RNPPBASICS_NAMESPACE {
 #define RNPPBASICS_NAMESPACE_END() }
 
 #if !defined(RNPPBASICS_ALLOW_PARALLEL)//can be overridden by compiler arguments
