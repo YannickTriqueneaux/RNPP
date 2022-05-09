@@ -3,12 +3,12 @@
 #include "Descriptor.h"
 
 RNPPBASICS_NAMESPACE_BEGIN()
-namespace Reflexions{
+namespace Reflections{
 
 Field::Field() :descriptor(nullptr), fieldName(nullptr){}
 
 
-Field::Field(int pOffset, Descriptor const & descriptor, StringId const & name) 
+Field::Field(int pOffset, Descriptor const & descriptor, std::string const & name) 
     : offset(pOffset)
     , descriptor(&descriptor)
     , fieldName(name){
@@ -26,7 +26,7 @@ Instance Field::getInstance(Instance const & parent) const {
     }
 }
 
-StringId const & Field::getName() const{
+std::string const & Field::getName() const{
     return fieldName;
 }
 

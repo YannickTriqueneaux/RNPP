@@ -1,14 +1,20 @@
-namespace TrustEngine{ namespace Serialization{
-    using TrustEngine::System::StringHelper::Tab;
+#include "pch.h"
+#include "Object.h"
+#include "Formats.h"
+#include "../Utils/StringHelper.h"
+#include <algorithm>
+
+RNPPBASICS_NAMESPACE_BEGIN()
+namespace Serializations{
 
     template<typename FORMAT>
-    Object<FORMAT>::Object(StringId const & objectname, int indentrange) :
+    Object<FORMAT>::Object(std::string const & objectname, int indentrange) :
         indentRange(indentrange),
         name(objectname)
     {}
     template<typename FORMAT>
     Object<FORMAT>::~Object(){
-        std::for_each(members.begin(), members.end(), [](ContentType::value_type const & pair){
+        std::for_each(members.begin(), members.end(), [](typename ContentType::value_type const & pair){
             delete pair.second;
         });
     }
@@ -20,7 +26,7 @@ namespace TrustEngine{ namespace Serialization{
     template<>
     bool Object<Formats::JSON>::print(std::ostream & streamResult) const {
         if (!name.empty()){
-            streamResult << Tab::_put(indentRange) << '"' << name << '"' << ": ";
+            streamResult << StringHelper::Tab::_put(indentRange) << '"' << name << '"' << ": ";
         }
         streamResult << "{" << std::endl;
 
@@ -33,7 +39,7 @@ namespace TrustEngine{ namespace Serialization{
             streamResult << std::endl;
         });
 
-        streamResult << Tab::_put(indentRange) << '}';
+        streamResult << StringHelper::Tab::_put(indentRange) << '}';
         return true;
     }
 

@@ -1,30 +1,30 @@
+#pragma once
 #include "Descriptor.h"
-#include "NativeDescriptor.h"
-#include "GenericDescriptor.h"
-#include "StringDescriptor.h"
 
+#include <utility>
+#include <vector>
+#include <unordered_map>
 
 RNPPBASICS_NAMESPACE_BEGIN()
-namespace Reflexions{
+
+
+template<typename T>
+class NativeDescriptor;
+template<typename T>
+class GenericDescriptor;
+class StringDescriptor;
+template<typename T>
+class VectorDescriptor;
+template<typename T, typename U>
+class PairDescriptor;
+template<typename T, typename U>
+class MapDescriptor;
+
+namespace Reflections{
 
 
 template<typename Type>
-Descriptor const * getDescriptorOf(Type const & instance){
-	return DescriptorHelper<Type>::DescriptorType::_getDescriptorInstance();
-}
-//template<typename Type>
-//Descriptor const * getDescriptorOf(Type const &&){
-//	return DescriptorHelper<Type>::DescriptorType::getDescriptorInstance();
-//}
-template<typename Type>
-Descriptor const * getDescriptorOf(){
-	return DescriptorHelper<Type>::DescriptorType::_getDescriptorInstance();
-}
-
-template<typename Type>
-struct DescriptorHelper{
-	typedef GenericDescriptor<Type> DescriptorType;
-};
+struct DescriptorHelper;
 
 template<>
 struct DescriptorHelper < double > {
@@ -60,7 +60,7 @@ struct DescriptorHelper<float>{
 };
 
 template<>
-struct DescriptorHelper<StringId>{
+struct DescriptorHelper<std::string>{
 	typedef StringDescriptor DescriptorType;
 };
 
@@ -73,6 +73,7 @@ template<typename T, typename U>
 struct DescriptorHelper<std::unordered_map<T, U>> {
 	typedef MapDescriptor<T, U> DescriptorType;
 };
+
 template<typename T, typename U>
 struct DescriptorHelper<std::pair<T, U>> {
 	typedef PairDescriptor<T, U> DescriptorType;
@@ -80,7 +81,7 @@ struct DescriptorHelper<std::pair<T, U>> {
 
 //constant types support
 template<>
-struct DescriptorHelper < StringId const > {
+struct DescriptorHelper < std::string const > {
     typedef StringDescriptor DescriptorType;
 };
 
@@ -97,6 +98,12 @@ template<typename T, typename U>
 struct DescriptorHelper < std::pair<T, U> const > {
     typedef PairDescriptor<T, U> DescriptorType;
 };
+
+template<typename Type>
+struct DescriptorHelper {
+    typedef GenericDescriptor<Type> DescriptorType;
+};
+
 
 
 };

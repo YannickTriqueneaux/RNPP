@@ -1,10 +1,9 @@
 #include "pch.h"
-#include "GenericDescriptor.h"
+#include "MapDescriptor.h"
 
 RNPPBASICS_NAMESPACE_BEGIN()
-namespace Reflexions{
+namespace Reflections{
 
 };
 RNPPBASICS_NAMESPACE_END()
-
 

@@ -1,18 +1,22 @@
-#include "private.h"
+#include "pch.h"
+#include "Stringizer.h"
+#include <iostream>
+#include "..\Reflections\Instance.h"
+#include "..\Reflections\StringDescriptor.h"
 
-namespace TrustEngine{
-    namespace Serialization{
+RNPPBASICS_NAMESPACE_BEGIN()
+namespace Serializations{
+    namespace Stringizer {
+        using Reflections::Instance;
 
-        using Reflexion::Instance;
-
-        bool Stringizer::instanceToString(std::ostream & streamResult, Instance const & instance){
+        bool instanceToString(std::ostream& streamResult, Instance const& instance) {
             if (!instance.isEmpty()
-                && instance.getType()->isStringizable()){
-                static_cast<Reflexion::StringizableDescriptor const*>(instance.getType())->stringize(streamResult, instance);
+                && instance.getType()->isStringizable()) {
+                static_cast<Reflections::StringizableDescriptor const*>(instance.getType())->ToString(streamResult, instance);
                 return true;
             }
             return false;
         }
-
-    };
-};//TENS
+    }
+};
+RNPPBASICS_NAMESPACE_END()

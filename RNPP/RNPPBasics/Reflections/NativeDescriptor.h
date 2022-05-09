@@ -1,5 +1,11 @@
+#pragma once
+#include <iostream>
+#include "../Utils/Macros.h"
+#include "StringDescriptor.h"
+#include "DescriptorRegistry.h"
+
 RNPPBASICS_NAMESPACE_BEGIN()
-namespace Reflexions{
+namespace Reflections{
 
 template<typename Type>
 class NativeDescriptor : public StringizableDescriptor{
@@ -22,23 +28,23 @@ public:
 
 template<>
 class NativeDescriptor<bool> : public BooleanBaseDescriptor{
-    static StringId const _descriptorName;
+    static std::string const _descriptorName;
 	friend class DescriptorRegistry;
 	NativeDescriptor(){}
 public:
-    static StringId const & _getInstanceTypeName(){
-        static StringId const _instanceTypeName(_stringize(bool));
+    static std::string const & _getInstanceTypeName(){
+        static std::string const _instanceTypeName(STRINGIZE(bool));
 		return _instanceTypeName;
     }
-    virtual StringId const & getInstanceTypename() const {
+    virtual std::string const & getInstanceTypename() const {
         return _getInstanceTypeName();
     }
 	typedef NativeDescriptor<bool> SelfType;
 	typedef int InstanceType;
-    static StringId const & _getDescriptorName(){
+    static std::string const & _getDescriptorName(){
 		return _descriptorName;
 	}
-    virtual StringId const & getName() const {
+    virtual std::string const & getName() const {
         return _getDescriptorName();
     }
 	static Descriptor const * _getDescriptorInstance(){
@@ -55,27 +61,27 @@ public:
 		return _descriptor;
 	}
     virtual bool instanceToBoolean(Instance const & instance) const;
-    virtual void stringize(std::ostream & streamResult, Instance const & instance) const;
+    virtual void ToString(std::ostream & streamResult, Instance const & instance) const;
 };
 template<>
 class NativeDescriptor<int> : public NumberBaseDescriptor{
-    static StringId const _descriptorName;
+    static std::string const _descriptorName;
 	friend class DescriptorRegistry;
 	NativeDescriptor(){}
 public:
-    static StringId const & _getInstanceTypeName(){
-        static StringId const _instanceTypeName(_stringize(int));
+    static std::string const & _getInstanceTypeName(){
+        static std::string const _instanceTypeName(STRINGIZE(int));
 		return _instanceTypeName;
     }
-    virtual StringId const & getInstanceTypename() const {
+    virtual std::string const & getInstanceTypename() const {
         return _getInstanceTypeName();
     }
 	typedef NativeDescriptor<int> SelfType;
 	typedef int InstanceType;
-    static StringId const & _getDescriptorName(){
+    static std::string const & _getDescriptorName(){
 		return _descriptorName;
     }
-    virtual StringId const & getName() const {
+    virtual std::string const & getName() const {
         return _getDescriptorName();
     }
 	static Descriptor const * _getDescriptorInstance(){
@@ -91,28 +97,28 @@ public:
 		_descriptor = newDescriptor;
 		return _descriptor;
 	}
-    virtual void stringize(std::ostream & streamResult, Instance const & instance) const;
+    virtual void ToString(std::ostream & streamResult, Instance const & instance) const;
 };
 
 template<>
 class NativeDescriptor<short> : public NumberBaseDescriptor{
-    static StringId const _descriptorName;
+    static std::string const _descriptorName;
 	friend class DescriptorRegistry;
 	NativeDescriptor(){}
 public:
 	typedef NativeDescriptor<short> SelfType;
 	typedef int InstanceType;
-    static StringId const & _getDescriptorName(){
+    static std::string const & _getDescriptorName(){
 		return _descriptorName;
     }
-    virtual StringId const & getName() const {
+    virtual std::string const & getName() const {
         return _getDescriptorName();
     }
-    static StringId const & _getInstanceTypeName(){
-        static StringId const _instanceTypeName(_stringize(short));
+    static std::string const & _getInstanceTypeName(){
+        static std::string const _instanceTypeName(STRINGIZE(short));
 		return _instanceTypeName;
     }
-    virtual StringId const & getInstanceTypename() const {
+    virtual std::string const & getInstanceTypename() const {
         return _getInstanceTypeName();
     }
 	static Descriptor const * _getDescriptorInstance(){
@@ -128,29 +134,29 @@ public:
 		_descriptor = newDescriptor;
 		return _descriptor;
     }
-    virtual void stringize(std::ostream & streamResult, Instance const & instance) const;
+    virtual void ToString(std::ostream & streamResult, Instance const & instance) const;
 };
 
 template<>
 class NativeDescriptor<long> : public NumberBaseDescriptor{
-    static StringId const _descriptorName;
+    static std::string const _descriptorName;
 	friend class DescriptorRegistry;
 	NativeDescriptor(){}
 public:
 	typedef NativeDescriptor<long> SelfType;
 	typedef long InstanceType;
 	
-    static StringId const & _getDescriptorName(){
+    static std::string const & _getDescriptorName(){
 		return _descriptorName;
     }
-    virtual StringId const & getName() const {
+    virtual std::string const & getName() const {
         return _getDescriptorName();
     }
-    static StringId const & _getInstanceTypeName(){
-        static StringId const _instanceTypeName(_stringize(long));
+    static std::string const & _getInstanceTypeName(){
+        static std::string const _instanceTypeName(STRINGIZE(long));
 		return _instanceTypeName;
     }
-    virtual StringId const & getInstanceTypename() const {
+    virtual std::string const & getInstanceTypename() const {
         return _getInstanceTypeName();
     }
 	static Descriptor const * _getDescriptorInstance(){
@@ -166,29 +172,29 @@ public:
 		_descriptor = newDescriptor;
 		return _descriptor;
 	}
-    virtual void stringize(std::ostream & streamResult, Instance const & instance) const;
+    virtual void ToString(std::ostream & streamResult, Instance const & instance) const;
 };
 
 template<>
 class NativeDescriptor<float> : public NumberBaseDescriptor{
-    static StringId const _descriptorName;
+    static std::string const _descriptorName;
 	friend class DescriptorRegistry;
 	NativeDescriptor(){}
 public:
 	typedef NativeDescriptor<float> SelfType;
 	typedef float InstanceType;
 
-    static StringId const & _getDescriptorName(){
+    static std::string const & _getDescriptorName(){
 		return _descriptorName;
     }
-    virtual StringId const & getName() const {
+    virtual std::string const & getName() const {
         return _getDescriptorName();
     }
-    static StringId const & _getInstanceTypeName(){
-        static StringId const _instanceTypeName(_stringize(float));
+    static std::string const & _getInstanceTypeName(){
+        static std::string const _instanceTypeName(STRINGIZE(float));
 		return _instanceTypeName;
     }
-    virtual StringId const & getInstanceTypename() const {
+    virtual std::string const & getInstanceTypename() const {
         return _getInstanceTypeName();
     }
 	static Descriptor const * _getDescriptorInstance(){
@@ -204,29 +210,29 @@ public:
 		_descriptor = newDescriptor;
 		return _descriptor;
 	}
-    virtual void stringize(std::ostream & streamResult, Instance const & instance) const;
+    virtual void ToString(std::ostream & streamResult, Instance const & instance) const;
 };
 
 template<>
 class NativeDescriptor<double> : public NumberBaseDescriptor{
-    static StringId const _descriptorName;
+    static std::string const _descriptorName;
 	friend class DescriptorRegistry;
 	NativeDescriptor(){}
 public:
 	typedef NativeDescriptor<double> SelfType;
 	typedef double InstanceType;
 
-    static StringId const & _getDescriptorName(){
+    static std::string const & _getDescriptorName(){
 		return _descriptorName;
     }
-    virtual StringId const & getName() const {
+    virtual std::string const & getName() const {
         return _getDescriptorName();
     }
-    static StringId const & _getInstanceTypeName(){
-        static StringId const _instanceTypeName(_stringize(double));
+    static std::string const & _getInstanceTypeName(){
+        static std::string const _instanceTypeName(STRINGIZE(double));
 		return _instanceTypeName;
     }
-    virtual StringId const & getInstanceTypename() const {
+    virtual std::string const & getInstanceTypename() const {
         return _getInstanceTypeName();
     }
 	static Descriptor const * _getDescriptorInstance(){
@@ -242,29 +248,29 @@ public:
 		_descriptor = newDescriptor;
 		return _descriptor;
 	}
-    virtual void stringize(std::ostream & streamResult, Instance const & instance) const;
+    virtual void ToString(std::ostream & streamResult, Instance const & instance) const;
 };
 
 template<>
 class NativeDescriptor<unsigned int> : public NumberBaseDescriptor{
-    static StringId const _descriptorName;
+    static std::string const _descriptorName;
 	friend class DescriptorRegistry;
 	NativeDescriptor(){}
 public:
 	typedef NativeDescriptor<unsigned int> SelfType;
 	typedef unsigned int InstanceType;
 
-    static StringId const & _getDescriptorName(){
+    static std::string const & _getDescriptorName(){
 		return _descriptorName;
     }
-    virtual StringId const & getName() const {
+    virtual std::string const & getName() const {
         return _getDescriptorName();
     }
-    static StringId const & _getInstanceTypeName(){
-        static StringId const _instanceTypeName(_stringize(unsigned int));
+    static std::string const & _getInstanceTypeName(){
+        static std::string const _instanceTypeName(STRINGIZE(unsigned int));
 		return _instanceTypeName;
     }
-    virtual StringId const & getInstanceTypename() const {
+    virtual std::string const & getInstanceTypename() const {
         return _getInstanceTypeName();
     }
 	static Descriptor const * _getDescriptorInstance(){
@@ -280,7 +286,7 @@ public:
 		_descriptor = newDescriptor;
 		return _descriptor;
 	}
-    virtual void stringize(std::ostream & streamResult, Instance const & instance) const;
+    virtual void ToString(std::ostream & streamResult, Instance const & instance) const;
 };
 
 

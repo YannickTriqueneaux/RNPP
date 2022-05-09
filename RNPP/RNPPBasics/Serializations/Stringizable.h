@@ -1,21 +1,28 @@
-namespace TrustEngine{
-    namespace Serialization{
+#pragma once
+#include "../RNPPBasics.h"
+#include "Value.h"
+#include "Element.h"
+#include <iostream>
 
-        template<typename FORMAT>
-        class Stringizable : public Element<FORMAT>{
-        public:
-            typedef Value<FORMAT>* ContentType;
+RNPPBASICS_NAMESPACE_BEGIN()
+
+namespace Serializations{
+
+    template<typename FORMAT>
+    class Stringizable : public Element<FORMAT>{
+    public:
+        typedef Value<FORMAT>* ContentType;
 
 
-            Stringizable(StringId const & objectname, int indentrange);
-            ~Stringizable();
+        Stringizable(std::string const & objectname, int indentrange);
+        ~Stringizable();
 
-            virtual bool print(std::ostream & streamResult) const;
+        virtual bool print(std::ostream & streamResult) const;
 
-            ContentType value = nullptr;
-        private:
-            int indentRange = 0;
-            StringId name;
-        };
+        ContentType value = nullptr;
+    private:
+        int indentRange = 0;
+        std::string name;
     };
-};//TENS
+};
+RNPPBASICS_NAMESPACE_END()

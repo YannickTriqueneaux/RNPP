@@ -1,15 +1,15 @@
+#pragma once
+
+RNPPBASICS_NAMESPACE_BEGIN()
+namespace Serializations{
 
 
-namespace TrustEngine{
-    namespace Serialization{
-
-
-        template<typename FORMAT>
-        class Element{
-        public:
-            virtual ~Element(){}
-            virtual bool print(std::ostream & streamResult)  const = 0;
-        };
-
+    template<typename FORMAT>
+    class Element{
+    public:
+        virtual ~Element(){}
+        virtual bool print(std::ostream & streamResult)  const = 0;
     };
-};//TENS
+
+};
+RNPPBASICS_NAMESPACE_END()

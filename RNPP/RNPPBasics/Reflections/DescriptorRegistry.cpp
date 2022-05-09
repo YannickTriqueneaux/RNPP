@@ -3,7 +3,7 @@
 #include "Descriptor.h"
 
 RNPPBASICS_NAMESPACE_BEGIN()
-namespace Reflexions{
+namespace Reflections{
 
 
 DescriptorRegistry::DescriptorRegistry(){
@@ -14,7 +14,7 @@ DescriptorRegistry & DescriptorRegistry::_getInstance(){
 }
 
 
-Descriptor * DescriptorRegistry::_getDescriptor(StringId const & descriptorName){
+Descriptor * DescriptorRegistry::_getDescriptor(std::string const & descriptorName){
 	DescriptorRegistry & registry = _getInstance();
 	auto found = registry.descriptors.find(descriptorName);
 	if(found == registry.descriptors.end()){

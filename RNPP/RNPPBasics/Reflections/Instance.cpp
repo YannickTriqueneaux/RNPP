@@ -3,7 +3,7 @@
 #include "Descriptor.h"
 
 RNPPBASICS_NAMESPACE_BEGIN()
-namespace Reflexions{
+namespace Reflections{
 
 
 Instance::Instance(): instance(nullptr), descriptor(nullptr){}

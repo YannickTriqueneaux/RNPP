@@ -1,12 +1,15 @@
+#pragma once
+#include "../RNPPBasics.h"
+#include "../Reflections/Instance.h"
+#include "Page.h"
 
-
-namespace TrustEngine{ namespace Serialization{
-    using Reflexion::Instance;
+RNPPBASICS_NAMESPACE_BEGIN()
+namespace Serializations{
 
     template<typename FORMAT>
     class InstanceSerializer{
     public:
-        InstanceSerializer(Instance const & instanceToSerialize) :instance(instanceToSerialize){}
+        InstanceSerializer(Instance const & instanceToSerialize) : instance(instanceToSerialize){}
 
         bool serialize(std::ostream & streamResult);
     private:

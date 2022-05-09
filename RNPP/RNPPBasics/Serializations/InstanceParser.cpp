@@ -1,6 +1,20 @@
-namespace TrustEngine{ namespace Serialization{
+#include "pch.h"
+#include "InstanceParser.h"
+#include <algorithm>
+#include <xutility>
+#include "../RNPPBasics.h"
+#include "../Reflections/StringizableDescriptor.h"
+#include "../Reflections/Instance.h"
+#include "Formats.h"
+#include "Element.h"
+#include "Stringizable.h"
+#include "Array.h"
+
+RNPPBASICS_NAMESPACE_BEGIN()
+namespace Serializations{
+
     using Formats::JSON;
-    using namespace Reflexions;
+    using namespace Reflections;
 
 
     template<typename FORMAT>
@@ -90,9 +104,9 @@ namespace TrustEngine{ namespace Serialization{
 
     template<typename FORMAT>
     bool fillArray(Array<FORMAT> & arrayvalue, Instance const & arrayInstance){
-        using namespace TrustEngine::System::StringHelper;
+
         bool succeed = true;
-        auto & array = arrayvalue.elements;
+        auto & arrayElements = arrayvalue.elements;
         auto arrayeDscriptor = static_cast<ArrayDescriptor const *>(arrayInstance.getType());
         std::vector<Instance> elements = std::move(arrayeDscriptor->getInstancesOfElements(arrayInstance));
 
@@ -106,7 +120,7 @@ namespace TrustEngine{ namespace Serialization{
                 Element<FORMAT> * element = nullptr;
                 succeed = getElementFormInstance(element, elmtInstance, nullptr, arrayvalue.getIndent() + 1) && succeed;
                 if (element){
-                    array << element;
+                    arrayElements.push_back(element);
                 }
             }
 

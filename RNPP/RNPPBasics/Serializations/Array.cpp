@@ -1,9 +1,15 @@
-namespace TrustEngine{ namespace Serialization{
+#include "pch.h"
+#include "Array.h"
+#include "../Utils/StringHelper.h"
+#include "Formats.h"
 
-    using TrustEngine::System::StringHelper::Tab;
+RNPPBASICS_NAMESPACE_BEGIN()
+namespace Serializations{
+
+    using StringHelper::Tab;
 
     template<typename FORMAT>
-    Array<FORMAT>::Array(StringId const & arrayname, int indentrange) 
+    Array<FORMAT>::Array(std::string const & arrayname, int indentrange) 
         :indentRange(indentrange),
         name(arrayname){}
 

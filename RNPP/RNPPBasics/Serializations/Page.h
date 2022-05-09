@@ -1,7 +1,10 @@
+#pragma once
+#include "../RNPPBasics.h"
+#include <iostream>
+#include "Element.h"
 
-
-
-namespace TrustEngine{ namespace Serialization{
+RNPPBASICS_NAMESPACE_BEGIN()
+namespace Serializations{
 
     /**
     * A page is the main object returned by InstanceSerializer::serialize()

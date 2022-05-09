@@ -1,7 +1,15 @@
-namespace TrustEngine{ namespace Serialization{
+#include "pch.h"
+#include "Value.h"
+#include "Formats.h"
+#include "../Reflections/NativeDescriptor.h"
+#include "../Reflections/Instance.h"
+#include "Stringizer.h"
+
+RNPPBASICS_NAMESPACE_BEGIN()
+namespace Serializations{
     
     using Formats::JSON; 
-    using namespace Reflexions;
+    using namespace Reflections;
 
     template<>
     bool ArrayValue< JSON >::print(std::ostream & streamResult)  const {

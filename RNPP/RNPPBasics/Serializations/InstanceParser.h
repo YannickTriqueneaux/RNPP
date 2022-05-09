@@ -1,4 +1,9 @@
-namespace TrustEngine{ namespace Serialization{
+#pragma once
+#include "../RNPPBasics.h"
+#include "Page.h"
+
+RNPPBASICS_NAMESPACE_BEGIN()
+namespace Serializations{
 
     template<typename FORMAT>
     class InstanceParser{

@@ -20,7 +20,7 @@ public:
     constexpr StringId(const char* str)
         : m_str(str), m_hash(string_hash(str)) {}
 
-    constexpr StringId(const StringId& other) 
+    constexpr StringId(const StringId& other)
         : m_str(other.m_str), m_hash(other.m_hash) {}
 
     bool operator==(const StringId& other) const

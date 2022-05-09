@@ -1,7 +1,14 @@
-RNPPBASICS_NAMESPACE_BEGIN()
-namespace Reflexions{
+#pragma once
+#include <string.h>
+#include "Descriptor.h"
+#include <string>
+#include <utility>
+#include "DescriptorHelper.h"
 
-class PairDescriptorBase : public Descriptor{
+RNPPBASICS_NAMESPACE_BEGIN()
+namespace Reflections{
+
+class PairDescriptorBase : public Descriptor {
 public:
     virtual bool isAContainer() const {
         return true;
@@ -10,9 +17,9 @@ public:
 
 template<typename FirstType, typename SecondType>
 class PairDescriptor : public PairDescriptorBase{
-	typedef FirstType                                   FistValueType;
+	typedef FirstType                                   FirstValueType;
 	typedef SecondType                                  SecondValueType;
-    typedef std::pair<FistValueType, SecondValueType>   InstanceType;
+    typedef std::pair<FirstValueType, SecondValueType>   InstanceType;
 	typedef PairDescriptor<FirstType, SecondType >      SelfType;
 
 
@@ -22,20 +29,20 @@ class PairDescriptor : public PairDescriptorBase{
 	static Descriptor const * _secondDescriptor;
 public:
 	PairDescriptor(){}
-    static StringId const & _getDescriptorName(){
-        static StringId const _descriptorName(StringId("PairDescriptor<")
-			.append(DescriptorHelper<FistValueType>::DescriptorType::_getInstanceTypeName()).append(",")
+    static std::string const & _getDescriptorName(){
+        static std::string const _descriptorName(std::string("PairDescriptor<")
+			.append(DescriptorHelper<FirstValueType>::DescriptorType::_getInstanceTypeName()).append(",")
 			.append(DescriptorHelper<SecondValueType>::DescriptorType::_getInstanceTypeName()).append(">"));
 		 return _descriptorName;
     }
-    virtual StringId const & getName() const {
+    virtual std::string const & getName() const {
         return _getDescriptorName();
     }
-    virtual StringId const & getInstanceTypename() const {
+    virtual std::string const & getInstanceTypename() const {
         return _getInstanceTypeName();
     }
-    static StringId const & _getInstanceTypeName(){
-        static StringId const _instanceTypeName(StringId("std::pair<").append(DescriptorHelper<FistValueType>::DescriptorType::_getInstanceTypeName()).append(",")
+    static std::string const & _getInstanceTypeName(){
+        static std::string const _instanceTypeName(std::string("std::pair<").append(DescriptorHelper<FirstValueType>::DescriptorType::_getInstanceTypeName()).append(",")
 			.append(DescriptorHelper<SecondValueType>::DescriptorType::_getInstanceTypeName()).append(">"));
 		return _instanceTypeName;
 	}
@@ -49,8 +56,8 @@ public:
 			return _descriptor;
 		}
         Descriptor * newDescriptor = DescriptorRegistry::_createDescriptor<SelfType>();
-		_firstDescriptor = getDescriptorOf<FistValueType>();
-		_secondDescriptor = getDescriptorOf<SecondValueType>();
+		_firstDescriptor = DescriptorHelper<FirstValueType>::DescriptorType::_getDescriptorInstance();
+		_secondDescriptor = DescriptorHelper<SecondValueType>::DescriptorType::_getDescriptorInstance();
 
         InstanceType * memory = 0;
         newDescriptor->addField("key", &memory->first);
@@ -61,10 +68,10 @@ public:
 	}
 };
 
-template<typename FistValueType, typename SecondValueType>
-Descriptor const * PairDescriptor<FistValueType, SecondValueType>::_firstDescriptor = nullptr;
-template<typename FistValueType, typename SecondValueType>
-Descriptor const * PairDescriptor<FistValueType, SecondValueType>::_secondDescriptor = nullptr;
+template<typename FirstValueType, typename SecondValueType>
+Descriptor const * PairDescriptor<FirstValueType, SecondValueType>::_firstDescriptor = nullptr;
+template<typename FirstValueType, typename SecondValueType>
+Descriptor const * PairDescriptor<FirstValueType, SecondValueType>::_secondDescriptor = nullptr;
 
 
 };

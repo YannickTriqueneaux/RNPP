@@ -1,4 +1,7 @@
-namespace TrustEngine{ namespace Serialization{
+#pragma once
+
+RNPPBASICS_NAMESPACE_BEGIN()
+namespace Serializations{
 
 
     namespace Formats{

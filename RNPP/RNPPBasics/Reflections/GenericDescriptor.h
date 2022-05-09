@@ -1,24 +1,28 @@
+#pragma once
+#include "Descriptor.h"
+#include "DescriptorHelper.h"
+
 RNPPBASICS_NAMESPACE_BEGIN()
-namespace Reflexions{
+namespace Reflections{
 
 template<typename Type>
 class GenericDescriptor : public Descriptor{
-    static StringId const _descriptorName;
+    static std::string const _descriptorName;
 	friend class DescriptorRegistry;
 	GenericDescriptor():parentClassDescriptor(nullptr){}
-    static StringId const & _getDescriptorName(){
+    static std::string const & _getDescriptorName(){
 		return _descriptorName;
 	}
 	Descriptor const * parentClassDescriptor;
     std::vector<Descriptor const*> inferDescriptors;
 public:
-    virtual StringId const & getName() const {
+    virtual std::string const & getName() const {
         return _getDescriptorName();
     }
-    static StringId const & _getInstanceTypeName(){
+    static std::string const & _getInstanceTypeName(){
         return Type::_getClassName();
     }
-    virtual StringId const & getInstanceTypename() const {
+    virtual std::string const & getInstanceTypename() const {
         return _getInstanceTypeName();
     }
 	static bool _isTemplateClass(){
@@ -46,15 +50,15 @@ public:
 
 
 template<typename Type>
-StringId const GenericDescriptor<Type>::_descriptorName = StringId("GenericDescriptor<").append(GenericDescriptor<Type>::_getInstanceTypeName()).append(">");
+std::string const GenericDescriptor<Type>::_descriptorName = std::string("GenericDescriptor<").append(GenericDescriptor<Type>::_getInstanceTypeName()).append(">");
 
 template<typename Type>
 template<typename InferType>
 void GenericDescriptor<Type>::addInferType(){
-    using namespace TrustEngine::System::StringHelper;
+
     Descriptor const * inferDescriptor = DescriptorHelper<InferType>::DescriptorType::_getDescriptorInstance();
     if (inferDescriptor){
-        inferDescriptors << inferDescriptor;
+        inferDescriptors.push_back(inferDescriptor);
     }
 }
 

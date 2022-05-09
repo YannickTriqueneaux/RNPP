@@ -1,5 +1,5 @@
 RNPPBASICS_NAMESPACE_BEGIN()
-namespace Reflexions{
+namespace Reflections{
 
 
     class FieldInstance{

@@ -1,6 +1,9 @@
+#include "pch.h"
+#include "Page.h"
+#include "Formats.h"
 
-
-namespace TrustEngine{ namespace Serialization{
+RNPPBASICS_NAMESPACE_BEGIN()
+namespace Serializations{
     
     using Formats::JSON;
 

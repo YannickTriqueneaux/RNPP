@@ -1,4 +1,10 @@
-namespace TrustEngine{ namespace Serialization{
+#include "pch.h"
+#include "../RNPPBasics.h"
+#include "InstanceSerializer.h"
+#include "Formats.h"
+
+RNPPBASICS_NAMESPACE_BEGIN()
+namespace Serializations{
     using Formats::JSON;
     
     template<>

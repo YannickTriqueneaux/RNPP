@@ -2,12 +2,12 @@
 #include "Descriptor.h"
 
 RNPPBASICS_NAMESPACE_BEGIN()
-namespace Reflexions{
+namespace Reflections{
 
 Descriptor::Descriptor(){
 }
 
-Field const * Descriptor::getField(StringId const & fieldName) const {
+Field const * Descriptor::getField(std::string const & fieldName) const {
     auto found = fields.find(fieldName);
     if (found == fields.end()){//maybe in inherit class
         auto parentDesc = getParentClassDescriptor();
@@ -34,7 +34,7 @@ std::vector<Field const *> Descriptor::getFields(bool withParentFields) const {
 bool Descriptor::containsField(Field const & field) const {
     return !!getField(field.getName());
 }
-bool Descriptor::containsField(StringId const & fieldname) const {
+bool Descriptor::containsField(std::string const & fieldname) const {
     return !!getField(fieldname);
 }
 
@@ -46,11 +46,11 @@ Descriptor const * Descriptor::_getDescriptorInstance(){
 void Descriptor::setParentClassDescriptor(Descriptor const * parentClassDescriptor){ 
     assert(0); 
 }
-StringId const & Descriptor::getName() const {
+std::string const & Descriptor::getName() const {
     assert(0);
     return System::StringHelper::EmptyString;
 }
-StringId const & Descriptor::getInstanceTypename() const {
+std::string const & Descriptor::getInstanceTypename() const {
     assert(0);
     return System::StringHelper::EmptyString;
 }

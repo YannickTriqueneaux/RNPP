@@ -2,7 +2,7 @@
 #include "ArrayDescriptor.h"
 
 RNPPBASICS_NAMESPACE_BEGIN()
-namespace Reflexions{
+namespace Reflections{
 
 
 };

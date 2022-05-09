@@ -4,7 +4,7 @@
 #include "Instance.h"
 
 RNPPBASICS_NAMESPACE_BEGIN()
-namespace Reflexions{
+namespace Reflections{
 
 
     FieldInstance::FieldInstance(Instance const & parentInstance, Field const & field) : field(&field),

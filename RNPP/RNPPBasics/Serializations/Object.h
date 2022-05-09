@@ -1,12 +1,20 @@
-namespace TrustEngine{ namespace Serialization{
+#pragma once
+#include "../RNPPBasics.h"
+#include "Element.h"
+#include <iostream>
+#include <string>
+#include <unordered_map>
+
+RNPPBASICS_NAMESPACE_BEGIN()
+namespace Serializations{
 
     template<typename FORMAT>
     class Object : public Element<FORMAT>{
     public:
-        typedef std::unordered_map<StringId, Element<FORMAT> const *> ContentType;
+        typedef std::unordered_map<std::string, Element<FORMAT> const *> ContentType;
 
 
-        Object(StringId const & objectname, int indentrange);
+        Object(std::string const & objectname, int indentrange);
         virtual ~Object();
 
         virtual bool print(std::ostream & streamResult) const ;
@@ -15,7 +23,7 @@ namespace TrustEngine{ namespace Serialization{
         int getIndent() const;
     private:
         int indentRange = 0;
-        StringId name;
+        std::string name;
     };
 };
 RNPPBASICS_NAMESPACE_END()

@@ -1,4 +1,11 @@
-namespace TrustEngine{ namespace Serialization{
+#pragma once
+#include "../RNPPBasics.h"
+#include <string>
+#include "Element.h"
+#include <iosfwd>
+
+RNPPBASICS_NAMESPACE_BEGIN()
+namespace Serializations{
 
 
     template<typename FORMAT>
@@ -7,7 +14,7 @@ namespace TrustEngine{ namespace Serialization{
         typedef std::vector<Element<FORMAT> const *> ContentType;
 
 
-        Array(StringId const & arrayname, int indentrange);
+        Array(std::string const & arrayname, int indentrange);
         ~Array();
 
         virtual bool print(std::ostream & streamResult)  const ;
@@ -17,7 +24,7 @@ namespace TrustEngine{ namespace Serialization{
         int getIndent() const ;
     private:
         int indentRange = 0;
-        StringId name;
+        std::string name;
     };
     
 };

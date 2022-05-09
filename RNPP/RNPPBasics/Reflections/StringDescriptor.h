@@ -1,5 +1,12 @@
+#pragma once
+#include "StringizableDescriptor.h"
+#include "Descriptor.h"
+#include "../Utils/Macros.h"
+#include <string.h>
+#include "DescriptorRegistry.h"
+
 RNPPBASICS_NAMESPACE_BEGIN()
-namespace Reflexions {
+namespace Reflections {
 
 class StringBaseDescriptor : public StringizableDescriptor{
 public:
@@ -7,7 +14,7 @@ public:
     virtual bool isAString() const {
         return true;
     }
-    virtual void stringize(std::ostream & streamResult, Instance const & instance) const = 0;
+    virtual void ToString(std::ostream & streamResult, Instance const & instance) const = 0;
 };
 class StringDescriptor : public StringBaseDescriptor{
     static std::string const _descriptorName;
@@ -23,7 +30,7 @@ public:
         return _getDescriptorName();
     }
     static std::string const & _getInstanceTypeName(){
-        static std::string const _instanceTypeName(_stringize(std::string));
+        static std::string const _instanceTypeName(STRINGIZE(std::string));
 		return _instanceTypeName;
     }
     virtual std::string const & getInstanceTypename() const {
@@ -41,7 +48,7 @@ public:
         _descriptor = DescriptorRegistry::_createDescriptor<SelfType>();
 		return _descriptor;
 	}
-    virtual void stringize(std::ostream & streamResult, Instance const & instance) const;
+    virtual void ToString(std::ostream & streamResult, Instance const & instance) const;
 };
 
 

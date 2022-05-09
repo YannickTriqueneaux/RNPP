@@ -1,5 +1,12 @@
-namespace TrustEngine{ namespace Serialization{
-    using Reflexion::Instance;
+#pragma once
+#include "../RNPPBasics.h"
+#include <iostream>
+#include "..\Reflections\Instance.h"
+#include "Element.h"
+
+RNPPBASICS_NAMESPACE_BEGIN()
+namespace Serializations{
+    using Reflections::Instance;
 
     template<typename FORMAT>
     class Value{

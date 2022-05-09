@@ -1,12 +1,13 @@
+#include <string>
 
 RNPPBASICS_NAMESPACE_BEGIN()
-namespace Reflexions{
+namespace Reflections{
 
 class Instance;
 class Descriptor;
 class Field{
 public:
-    Field(int pOffset, Descriptor const & descriptor, StringId const & name);
+    Field(int pOffset, Descriptor const & descriptor, std::string const & name);
 
     /**
     *  return the instance of this field form his parent
@@ -18,7 +19,7 @@ public:
     /**
     * @return the name of the field
     */
-    StringId const & getName() const;
+    std::string const & getName() const;
 
     /**
     * @return the name of the field
@@ -26,7 +27,7 @@ public:
     Descriptor const & getType() const;
 private:
     Descriptor const * descriptor;
-    StringId const fieldName;
+    std::string const fieldName;
     unsigned int offset;
 
 private:
