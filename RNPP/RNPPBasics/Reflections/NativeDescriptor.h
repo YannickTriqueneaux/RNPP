@@ -47,7 +47,7 @@ public:
     virtual std::string const & getName() const {
         return _getDescriptorName();
     }
-	static Descriptor const * _getDescriptorInstance(){
+	static Descriptor const * _getClassDescriptor(){
 		static Descriptor const * _descriptor;
 		if (_descriptor){
 			return _descriptor;
@@ -84,7 +84,7 @@ public:
     virtual std::string const & getName() const {
         return _getDescriptorName();
     }
-	static Descriptor const * _getDescriptorInstance(){
+	static Descriptor const * _getClassDescriptor(){
 		static Descriptor const * _descriptor;
 		if(_descriptor){
 			return _descriptor;
@@ -121,7 +121,7 @@ public:
     virtual std::string const & getInstanceTypename() const {
         return _getInstanceTypeName();
     }
-	static Descriptor const * _getDescriptorInstance(){
+	static Descriptor const * _getClassDescriptor(){
 		static Descriptor const * _descriptor;
 		if(_descriptor){
 			return _descriptor;
@@ -159,7 +159,7 @@ public:
     virtual std::string const & getInstanceTypename() const {
         return _getInstanceTypeName();
     }
-	static Descriptor const * _getDescriptorInstance(){
+	static Descriptor const * _getClassDescriptor(){
 		static Descriptor const * _descriptor;
 		if(_descriptor){
 			return _descriptor;
@@ -197,7 +197,7 @@ public:
     virtual std::string const & getInstanceTypename() const {
         return _getInstanceTypeName();
     }
-	static Descriptor const * _getDescriptorInstance(){
+	static Descriptor const * _getClassDescriptor(){
 		static Descriptor const * _descriptor;
 		if(_descriptor){
 			return _descriptor;
@@ -235,7 +235,7 @@ public:
     virtual std::string const & getInstanceTypename() const {
         return _getInstanceTypeName();
     }
-	static Descriptor const * _getDescriptorInstance(){
+	static Descriptor const * _getClassDescriptor(){
 		static Descriptor const * _descriptor;
 		if(_descriptor){
 			return _descriptor;
@@ -273,7 +273,7 @@ public:
     virtual std::string const & getInstanceTypename() const {
         return _getInstanceTypeName();
     }
-	static Descriptor const * _getDescriptorInstance(){
+	static Descriptor const * _getClassDescriptor(){
 		static Descriptor const * _descriptor;
 		if(_descriptor){
 			return _descriptor;

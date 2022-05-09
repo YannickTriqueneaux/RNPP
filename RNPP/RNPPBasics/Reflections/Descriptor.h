@@ -5,7 +5,6 @@
 #include <vector>
 #include <string>
 #include "Field.h"
-#include "DescriptorHelper.h"
 
 
 
@@ -22,16 +21,15 @@ protected:
 
 public:
     template<typename FieldType>
-    Field const * addField(std::string const & fieldName, FieldType const * offset){
+    Field const * addField(std::string const & fieldName, FieldType const * offset, Descriptor const* fieldDescriptor){
         assert(fields.find(fieldName) == fields.end() && "Descriptor::addField - field already added");
-        Descriptor const * fieldDescriptor = DescriptorHelper<FieldType>::DescriptorType::_getDescriptorInstance();
         assert(fieldDescriptor && "Descriptor::addField - unknown field descritor");
-        auto & pair = fields.insert(std::make_pair(fieldName, Field())).first;
+        auto & pair = fields.emplace(fieldName, Field()).first;
         pair->second = Field(static_cast<int>((unsigned int*)offset - (unsigned int*)0), *fieldDescriptor, pair->first);
         return &(pair->second);
     }
 
-    template<typename FieldType>
+    /*template<typename FieldType>
     Field const * addDescriptorField(std::string const & fieldName, Descriptor const * offset){
         assert(descriptorField.find(fieldName) == descriptorField.end());
         Descriptor const * fieldDescriptor = DescriptorHelper<FieldType>::DescriptorType::_getDescriptorInstance();
@@ -39,22 +37,22 @@ public:
         auto & pair = descriptorField.insert(std::make_pair(fieldName, Field())).first;
         pair->second = Field(static_cast<int>((unsigned int*)offset - (unsigned int*)0), *fieldDescriptor, pair->first);
         return &(pair->second);
-    }
+    }*/
 
-    template<typename Type>
-    bool isA(){
-        auto compareDescriptor = DescriptorHelper<Type>::DescriptorType::_getDescriptorInstance();
-        if (compareDescriptor == this){
-            return true;
-        }
-        else{//maybe in inherit class.  Recursive search
-            auto parentDesc = getParentClassDescriptor();
-            if (parentDesc){
-                return parentDesc->isA<Type>();
-            }
-        }
-        return false;
-    }
+    //template<typename Type>
+    //bool isA(){
+    //    auto compareDescriptor = DescriptorHelper<Type>::DescriptorType::_getDescriptorInstance();
+    //    if (compareDescriptor == this){
+    //        return true;
+    //    }
+    //    else{//maybe in inherit class.  Recursive search
+    //        auto parentDesc = getParentClassDescriptor();
+    //        if (parentDesc){
+    //            return parentDesc->isA<Type>();
+    //        }
+    //    }
+    //    return false;
+    //}
 
     /**
     * find the Field by the given name
@@ -80,8 +78,8 @@ public:
 
     virtual std::string const & getName() const ;
     virtual std::string const & getInstanceTypename() const;
-    virtual bool isStringizable() const ;
-    virtual bool isAnArray() const ;
+    virtual bool isStringizable() const;
+    virtual bool isAnArray() const;
     virtual bool isAGeneric() const;
     virtual bool isAContainer() const;
 private:

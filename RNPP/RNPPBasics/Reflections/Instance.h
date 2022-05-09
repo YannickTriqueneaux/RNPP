@@ -1,5 +1,6 @@
 #pragma once
-#include "DescriptorGetter.h"
+#include "../RNPPBasics.h"
+//#include "DescriptorGetter.h"
 
 RNPPBASICS_NAMESPACE_BEGIN()
 namespace Reflections
@@ -11,8 +12,8 @@ namespace Reflections
     public:
 	    Instance();
 	    Instance(void * instance, Descriptor const * descriptor);
-	    template<typename T>
-        inline Instance(T const * instance);
+	    //template<typename T>
+        //inline Instance(T const * instance);
 
 	    void * get() const ;
 	    Descriptor const * getType() const ;
@@ -32,10 +33,10 @@ namespace Reflections
 	    Descriptor const * descriptor;
     };
 
-    template<typename T>
-    inline Instance::Instance(T const * instance) : instance(const_cast<T*>(instance)), descriptor(getDescriptorOf<T>())
-    {
-    }
+    //template<typename T>
+    //inline Instance::Instance(T const * instance) : instance(const_cast<T*>(instance)), descriptor(getDescriptorOf<T>())
+    //{
+    //}
 
 };
 RNPPBASICS_NAMESPACE_END()

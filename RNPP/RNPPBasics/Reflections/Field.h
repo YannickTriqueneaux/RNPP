@@ -1,13 +1,17 @@
+#pragma once
 #include <string>
+#include "../RNPPBasics.h"
 
 RNPPBASICS_NAMESPACE_BEGIN()
 namespace Reflections{
 
 class Instance;
 class Descriptor;
+
 class Field{
 public:
     Field(int pOffset, Descriptor const & descriptor, std::string const & name);
+    void operator=(Field const& other);
 
     /**
     *  return the instance of this field form his parent
@@ -27,7 +31,7 @@ public:
     Descriptor const & getType() const;
 private:
     Descriptor const * descriptor;
-    std::string const fieldName;
+    std::string fieldName;
     unsigned int offset;
 
 private:

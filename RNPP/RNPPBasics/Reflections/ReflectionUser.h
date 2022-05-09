@@ -1,26 +1,42 @@
-namespace TrustEngine{ namespace Reflexion{
+#pragma once
+#include <iostream>
+#include "../RNPPBasics.h"
+#include "../Utils/Macros.h"
+#include "Descriptor.h"
+#include <string>
+#include "DescriptorRegistry.h"
+#include "GenericDescriptor.h"
+#include "NativeDescriptor.h"
+#include "StringDescriptor.h"
+#include "DescriptorHelper.h"
 
-class NO_PARENT_CLASS{
-public:
-    static Descriptor const * _getClassDescriptor(){ return nullptr; }
-};
+#include "DescriptorInternalImpls.h"
+
+RNPPBASICS_NAMESPACE_BEGIN()
+namespace Reflections {
+
+
+    class NO_PARENT_CLASS{
+    public:
+        static Descriptor const * _getClassDescriptor(){ return nullptr; }
+    };
 
 
 #define REFLECTED_CLASS\
     public:\
-    virtual TrustEngine::Reflexion::Descriptor const * getDescriptor() const; \
-    static TrustEngine::Reflexion::Descriptor const * _getClassDescriptor(); \
+    virtual RNPPBasics::Reflections::Descriptor const * getDescriptor() const; \
+    static RNPPBasics::Reflections::Descriptor const * _getClassDescriptor(); \
     static const bool _isTemplateClass = false;\
     static std::string const & _getClassName();\
     private:\
-    typedef TrustEngine::Reflexion::NO_PARENT_CLASS Reflected_ParentClass;
+    typedef RNPPBasics::Reflections::NO_PARENT_CLASS Reflected_ParentClass;
 
 
 
 #define REFLECTED_SUPER_CLASS(ParentClass)\
     public:\
-    virtual TrustEngine::Reflexion::Descriptor const * getDescriptor() const;\
-    static TrustEngine::Reflexion::Descriptor const * _getClassDescriptor();\
+    virtual RNPPBasics::Reflections::Descriptor const * getDescriptor() const;\
+    static RNPPBasics::Reflections::Descriptor const * _getClassDescriptor();\
     static const bool _isTemplateClass = false;\
     static std::string const & _getClassName();\
     private:\
@@ -36,21 +52,21 @@ public:
 
 
 
-#define DEFINE_CLASS_BEGIN(ClassName)\
-    TrustEngine::Reflexion::Descriptor const * ClassName::getDescriptor() const{\
+#define REFLECT_CLASS_BEGIN(ClassName)\
+    RNPPBasics::Reflections::Descriptor const * ClassName::getDescriptor() const{\
         return ClassName::_getClassDescriptor();\
     }\
     std::string const & ClassName::_getClassName(){\
-        static const std::string _instanceTypeName(_stringize(ClassName));\
+        static const std::string _instanceTypeName(STRINGIZE(ClassName));\
         return _instanceTypeName;\
     }\
-    TrustEngine::Reflexion::Descriptor const * ClassName::_getClassDescriptor(){\
-        using namespace TrustEngine::Reflexion;\
+    RNPPBasics::Reflections::Descriptor const * ClassName::_getClassDescriptor(){\
+        using namespace RNPPBasics::Reflections;\
         static Descriptor const * _descriptor = nullptr;\
         if(_descriptor){\
             return _descriptor;\
                                         }\
-        _descriptor = DescriptorRegistry::_getDescriptor(_stringize(ClassName));\
+        _descriptor = DescriptorRegistry::_getDescriptor(STRINGIZE(ClassName));\
         if(_descriptor != nullptr){\
             return _descriptor;\
                                         }\
@@ -58,32 +74,33 @@ public:
         Descriptor * newDescriptor = DescriptorRegistry::_createDescriptor<GenericDescriptor<ClassName>>();\
         newDescriptor->setParentClassDescriptor(Reflected_ParentClass::_getClassDescriptor());
 
+#pragma warning(disable:6011)
+#define REFLECT_FIELD(fieldname)\
+    RNPPBasics::Reflections::Field const * field_##fieldname =  newDescriptor->addField(STRINGIZE(fieldname),&memory->fieldname, DescriptorHelper<decltype(fieldname)>::DescriptorType::_getDescriptorInstance())
+#pragma warning(default:6011)
 
-#define DEFINE_FIELD(fieldname)\
-    TrustEngine::Reflexion::Field const * field_##fieldname =  newDescriptor->addField(_stringize(fieldname),&memory->fieldname)
-
-#define DEFINE_CLASS_END\
+#define REFLECT_CLASS_END\
     _descriptor = newDescriptor;\
     return _descriptor;\
     }
 
-#define TEMPLATE_CLASS_BEGIN(ClassName,InferType)\
+#define REFLECT_TEMPLATE_CLASS_BEGIN(ClassName,InferType)\
 private:\
     typedef InferType _InferType; \
     static const int _inferTypeNumber = 1;\
     static const bool _isTemplateClass = true;\
-    friend class TrustEngine::Reflexion::GenericDescriptor< ClassName<InferType> > ;\
+    friend class RNPPBasics::Reflections::GenericDescriptor< ClassName<InferType> > ;\
 public:\
     static std::string const & _getClassName(){\
-        using namespace TrustEngine::Reflexion;\
-        static std::string const templateClassName = std::string(_stringize(ClassName)).append("<").append(DescriptorHelper<InferType>::DescriptorType::_getInstanceTypeName()).append(">");\
+        using namespace RNPPBasics::Reflections;\
+        static std::string const templateClassName = std::string(STRINGIZE(ClassName)).append("<").append(DescriptorHelper<InferType>::DescriptorType::_getInstanceTypeName()).append(">");\
         return templateClassName;\
     }\
-    virtual TrustEngine::Reflexion::Descriptor const * getDescriptor() const {\
+    virtual RNPPBasics::Reflections::Descriptor const * getDescriptor() const {\
         return ClassName<InferType>::_getClassDescriptor();\
     }\
-    static TrustEngine::Reflexion::Descriptor const * _getClassDescriptor(){\
-        using namespace TrustEngine::Reflexion;\
+    static RNPPBasics::Reflections::Descriptor const * _getClassDescriptor(){\
+        using namespace RNPPBasics::Reflections;\
         static Descriptor const * _descriptor = nullptr;\
         if (_descriptor){\
             return _descriptor;\

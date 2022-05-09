@@ -1,6 +1,5 @@
 #pragma once
 #include "Descriptor.h"
-#include "DescriptorHelper.h"
 
 RNPPBASICS_NAMESPACE_BEGIN()
 namespace Reflections{
@@ -51,16 +50,6 @@ public:
 
 template<typename Type>
 std::string const GenericDescriptor<Type>::_descriptorName = std::string("GenericDescriptor<").append(GenericDescriptor<Type>::_getInstanceTypeName()).append(">");
-
-template<typename Type>
-template<typename InferType>
-void GenericDescriptor<Type>::addInferType(){
-
-    Descriptor const * inferDescriptor = DescriptorHelper<InferType>::DescriptorType::_getDescriptorInstance();
-    if (inferDescriptor){
-        inferDescriptors.push_back(inferDescriptor);
-    }
-}
 
 
 };

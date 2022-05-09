@@ -1,6 +1,12 @@
+#pragma once
+#include "../RNPPBasics.h"
+#include "Instance.h"
+
+
 RNPPBASICS_NAMESPACE_BEGIN()
 namespace Reflections{
 
+    class Field;
 
     class FieldInstance{
     public:

@@ -2,11 +2,12 @@
 #include "StringDescriptor.h"
 #include <iostream>
 #include "Instance.h"
+#include "../Utils/Macros.h"
 
 RNPPBASICS_NAMESPACE_BEGIN()
 namespace Reflections {
     
-std::string const StringDescriptor::_descriptorName = STRINGIZEStringDescriptor);
+std::string const StringDescriptor::_descriptorName = STRINGIZE(StringDescriptor);
 
 
 void StringDescriptor::ToString(std::ostream & streamResult, Instance const & instance) const{

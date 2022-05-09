@@ -1,14 +1,12 @@
 #pragma once
 #include <assert.h>
 #include "../Utils/Macros.h"
+#include "Instance.h"
 #include <string.h>
 #include "Descriptor.h"
 #include "DescriptorRegistry.h"
 #include "ArrayDescriptor.h"
-#include "Instance.h"
 #include <string>
-#include "DescriptorGetter.h"
-#include "DescriptorHelper.h"
 
 RNPPBASICS_NAMESPACE_BEGIN()
 namespace Reflections {
@@ -35,10 +33,8 @@ public:
     virtual std::string const & getName() const {
         return _getDescriptorName();
     }
-    static std::string const & _getInstanceTypeName(){
-        static std::string const _instanceTypeName(std::string("std::vector<").append(DescriptorHelper<T>::DescriptorType::_getInstanceTypeName()).append(">"));
-		return _instanceTypeName;
-    }
+    static std::string const& _getInstanceTypeName();
+
     virtual std::string const & getInstanceTypename() const {
         return _getInstanceTypeName();
     }
@@ -63,17 +59,11 @@ public:
         InstanceType const * vector = reinterpret_cast<InstanceType const*>(vectorInstance.get());
         std::vector<Instance> elements;
         std::for_each(vector->begin(), vector->end(), [&elements](ValueType const & elmt){
-            elements.push_back(const_cast<ValueType*>(&elmt));
+            elements.emplace_back((void*)(&elmt), _valueDescriptor);
         });
         return std::move(elements);
     }
 };
-
-template<typename T>
-Descriptor const * VectorDescriptor<T>::_valueDescriptor = DescriptorHelper<T>::DescriptorType::_getDescriptorInstance();
-
-template<typename T>
-std::string const VectorDescriptor<T>::_descriptorName = std::string("VectorDescriptor<" + DescriptorHelper<T>::DescriptorType::_getInstanceTypeName()).append(">");
 
 
 };

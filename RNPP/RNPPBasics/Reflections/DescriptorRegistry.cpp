@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "DescriptorRegistry.h"
-#include "Descriptor.h"
 
 RNPPBASICS_NAMESPACE_BEGIN()
 namespace Reflections{

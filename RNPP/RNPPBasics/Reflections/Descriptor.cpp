@@ -46,14 +46,17 @@ Descriptor const * Descriptor::_getDescriptorInstance(){
 void Descriptor::setParentClassDescriptor(Descriptor const * parentClassDescriptor){ 
     assert(0); 
 }
+
+#pragma warning(disable: 4172)
 std::string const & Descriptor::getName() const {
     assert(0);
-    return System::StringHelper::EmptyString;
+    return (std::string const&)nullptr;
 }
 std::string const & Descriptor::getInstanceTypename() const {
     assert(0);
-    return System::StringHelper::EmptyString;
+    return (std::string const&)nullptr;
 }
+#pragma warning(default: 4172)
 
 Descriptor const * Descriptor::getParentClassDescriptor() const { 
     return nullptr; 

@@ -1,12 +1,14 @@
 #pragma once
+#include "../RNPPBasics.h"
 #include <assert.h>
 #include <string>
 #include <unordered_map>
+#include <vector>
 #include "Descriptor.h"
 #include "ArrayDescriptor.h"
 #include "Instance.h"
-#include "DescriptorHelper.h"
 #include "DescriptorRegistry.h"
+#include "PairDescriptor.h"
 
 RNPPBASICS_NAMESPACE_BEGIN()
 namespace Reflections{
@@ -29,21 +31,21 @@ class MapDescriptor : public MapDescriptorBase{
 
 	friend class DescriptorRegistry;
 
-	static Descriptor const * _pairDescriptor;
+	static PairDescriptor<FirstType, SecondType> const * _pairDescriptor;
 	MapDescriptor(){}
 public:
     static std::string const & _getDescriptorName(){
         static std::string const descriptorName(std::string("MapDescriptor<")
-			.append(DescriptorHelper<FirstValueType>::DescriptorType::_getInstanceTypeName()).append(",")
-			.append(DescriptorHelper<SecondValueType>::DescriptorType::_getInstanceTypeName()).append(">"));
+			.append(_pairDescriptor->_getFirstDescriptorInstance()->getInstanceTypename()).append(",")
+			.append(_pairDescriptor->_getSecondDescriptorInstance()->getInstanceTypename()).append(">"));
 		return descriptorName;
     }
     virtual std::string const & getName() const {
         return _getDescriptorName();
     }
     static std::string const & _getInstanceTypeName(){
-        static std::string const _instanceTypeName(std::string("std::unordered_map<").append(DescriptorHelper<FirstValueType>::DescriptorType::_getInstanceTypeName()).append(",")
-			.append(DescriptorHelper<SecondValueType>::DescriptorType::_getInstanceTypeName()).append(">"));
+        static std::string const _instanceTypeName(std::string("std::unordered_map<").append(_pairDescriptor->_getFirstDescriptorInstance()->getInstanceTypename()).append(",")
+			.append(_pairDescriptor->_getSecondDescriptorInstance()->getInstanceTypename()).append(">"));
 		return _instanceTypeName;
     }
     virtual std::string const & getInstanceTypename() const {
@@ -59,7 +61,7 @@ public:
 			return _descriptor;
 		}
 		Descriptor * newDescriptor = DescriptorRegistry::_createDescriptor<SelfType>(); 
-		_pairDescriptor = getDescriptorOf<ValueType>();
+
 		_descriptor = newDescriptor;
 		return _descriptor;
 	}
@@ -68,17 +70,17 @@ public:
 
         assert(!mapInstance.isEmpty() && "MapDescriptor::getInstancesOfElements - the given map instance cannot be empty");
         assert((mapInstance.getType() == this) && "MapDescriptor::getInstancesOfElements - the given instance don't match with the expected descriptor");
-        InstanceType const * vector = reinterpret_cast<InstanceType const*>(mapInstance.get());
+        InstanceType const * map = reinterpret_cast<InstanceType const*>(mapInstance.get());
         std::vector<Instance> elements;
-        std::for_each(vector->begin(), vector->end(), [&elements](typename InstanceType::value_type const & elmt){
-            elements.push_back(const_cast<ValueType*>(reinterpret_cast<const ValueType*>(&elmt)));//remove 'const' form the key value type
-        });
+        auto end = map->end();
+        for (auto it = map->begin(); it != end; ++it)
+        {
+            elements.emplace_back((void*)(&*it), _pairDescriptor);//remove 'const' form the key value type
+        }
+
         return std::move(elements);
     }
 };
-
-template<typename FirstValueType, typename SecondValueType>
-Descriptor const * MapDescriptor<FirstValueType, SecondValueType>::_pairDescriptor = nullptr;
 
 
 };

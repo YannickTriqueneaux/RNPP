@@ -1,13 +1,13 @@
 #pragma once
-#include "Descriptor.h"
-#include "GenericDescriptor.h"
-#include "MapDescriptor.h"
-#include "NativeDescriptor.h"
-#include "PairDescriptor.h"
-#include "StringDescriptor.h"
-#include "VectorDescriptor.h"
-#include "DescriptorHelper.h"
-
+//#include "DescriptorHelper.h"
+//#include "Descriptor.h"
+//#include "GenericDescriptor.h"
+//#include "MapDescriptor.h"
+//#include "NativeDescriptor.h"
+//#include "PairDescriptor.h"
+//#include "StringDescriptor.h"
+//#include "VectorDescriptor.h"
+//#include "DescriptorHelper.h"
 
 
 RNPPBASICS_NAMESPACE_BEGIN()

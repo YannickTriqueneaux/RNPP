@@ -1,9 +1,9 @@
 #pragma once
 #include <string.h>
-#include "Descriptor.h"
 #include <string>
 #include <utility>
-#include "DescriptorHelper.h"
+#include "Descriptor.h"
+#include "DescriptorRegistry.h"
 
 RNPPBASICS_NAMESPACE_BEGIN()
 namespace Reflections{
@@ -31,8 +31,8 @@ public:
 	PairDescriptor(){}
     static std::string const & _getDescriptorName(){
         static std::string const _descriptorName(std::string("PairDescriptor<")
-			.append(DescriptorHelper<FirstValueType>::DescriptorType::_getInstanceTypeName()).append(",")
-			.append(DescriptorHelper<SecondValueType>::DescriptorType::_getInstanceTypeName()).append(">"));
+			.append(_firstDescriptor->getInstanceTypename()).append(",")
+			.append(_secondDescriptor->getInstanceTypename()).append(">"));
 		 return _descriptorName;
     }
     virtual std::string const & getName() const {
@@ -42,8 +42,8 @@ public:
         return _getInstanceTypeName();
     }
     static std::string const & _getInstanceTypeName(){
-        static std::string const _instanceTypeName(std::string("std::pair<").append(DescriptorHelper<FirstValueType>::DescriptorType::_getInstanceTypeName()).append(",")
-			.append(DescriptorHelper<SecondValueType>::DescriptorType::_getInstanceTypeName()).append(">"));
+        static std::string const _instanceTypeName(std::string("std::pair<").append(_firstDescriptor->getInstanceTypename()).append(",")
+			.append(_secondDescriptor->getInstanceTypename()).append(">"));
 		return _instanceTypeName;
 	}
     static Descriptor const * _getDescriptorInstance(){
@@ -56,23 +56,23 @@ public:
 			return _descriptor;
 		}
         Descriptor * newDescriptor = DescriptorRegistry::_createDescriptor<SelfType>();
-		_firstDescriptor = DescriptorHelper<FirstValueType>::DescriptorType::_getDescriptorInstance();
-		_secondDescriptor = DescriptorHelper<SecondValueType>::DescriptorType::_getDescriptorInstance();
 
         InstanceType * memory = 0;
-        newDescriptor->addField("key", &memory->first);
-        newDescriptor->addField("value", &memory->second);
+        newDescriptor->addField("key", &memory->first, _firstDescriptor);
+        newDescriptor->addField("value", &memory->second, _secondDescriptor);
 
 		_descriptor = newDescriptor;
 		return _descriptor;
-	}
+    }
+    static Descriptor const* _getFirstDescriptorInstance()
+    {
+        return _firstDescriptor;
+    }
+    static Descriptor const* _getSecondDescriptorInstance()
+    {
+        return _secondDescriptor;
+    }
 };
-
-template<typename FirstValueType, typename SecondValueType>
-Descriptor const * PairDescriptor<FirstValueType, SecondValueType>::_firstDescriptor = nullptr;
-template<typename FirstValueType, typename SecondValueType>
-Descriptor const * PairDescriptor<FirstValueType, SecondValueType>::_secondDescriptor = nullptr;
-
 
 };
 RNPPBASICS_NAMESPACE_END()

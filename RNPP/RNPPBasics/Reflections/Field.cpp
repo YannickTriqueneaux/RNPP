@@ -1,6 +1,9 @@
 #include "pch.h"
 #include "Field.h"
+#include "../RNPPBasics.h"
+#include <assert.h>
 #include "Descriptor.h"
+#include "Instance.h"
 
 RNPPBASICS_NAMESPACE_BEGIN()
 namespace Reflections{
@@ -13,6 +16,13 @@ Field::Field(int pOffset, Descriptor const & descriptor, std::string const & nam
     , descriptor(&descriptor)
     , fieldName(name){
 
+}
+
+void Field::operator=(Field const& other)
+{
+    offset = other.offset;
+    descriptor = other.descriptor;
+    fieldName = other.fieldName;
 }
 
 Instance Field::getInstance(Instance const & parent) const {

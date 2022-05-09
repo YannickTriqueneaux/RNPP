@@ -1,5 +1,6 @@
 #pragma once
 #include <unordered_map>
+#include "../RNPPBasics.h"
 
 RNPPBASICS_NAMESPACE_BEGIN()
 namespace Reflections{
@@ -10,13 +11,13 @@ namespace Reflections{
 		static DescriptorRegistry & _getInstance();
 		DescriptorRegistry();
 
-		DescriptorRegistry(DescriptorRegistry && other){
+		DescriptorRegistry(DescriptorRegistry && other) noexcept {
 		}
 
 		void swap(DescriptorRegistry &other){
 			std::swap(descriptors,other.descriptors);
 		}
-		DescriptorRegistry &operator=(DescriptorRegistry && other){
+		DescriptorRegistry &operator=(DescriptorRegistry && other) noexcept {
 			swap(other);
 			return *this;
 		}
